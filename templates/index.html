@@ -9,6 +9,8 @@
     <script src="{{ url_for('static', filename='js/socket.io.js') }}"></script>
   </head>
   <body>
+
+    <!-- page start -->
     <div id="home-page" class="mypage">
       <div class="mypage-header">
         <p class="font-weight-bold">古亭兒主闖關</p>
@@ -18,37 +20,51 @@
         <button type="button" class="btn btn-primary btn-lg btn-block">我是關主</button>
         <button type="button" class="btn btn-primary btn-lg btn-block">我是組員</button>
       </div>
-      <div class='mypage-footer'>
-        <img src="{{ url_for('static', filename='img/kt50.png') }}" class="img-fluid" alt="Responsive image">
-      </div>
+      <div class='mypage-footer'>123</div>
     </div>
+    <!-- page end -->
 
-    <div id="login-page" class="mypage">
+    <!-- page start -->
+    <div id="login-page" class="mypag">
       <div class="mypage-header">
         <p class="font-weight-bold">古亭兒主闖關</p>
       </div>
       <div class="mypage-content">
         <h4 class="text-center">請輸入關主密碼</h4>
         <br>
-          <form class="form-inline">
+          <form class="form-inline" id='owner_login_form'>
             <div class="form-group">
               <h4 class="text-center">密碼</h4>
-              <input type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline">
+              <input type="password" id="ownerPW" name='password' class="form-control">
               <h4 class="text-center">你是哪關的關主</h4>
-              <select class="form-control form-control-lg">
+              <select class="form-control" name='gate'>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
                 <option>4</option>
                 <option>5</option>
               </select>
+              <br>
+              <button type="button" class="btn btn-primary btn-lg btn-block">下一步</button>
             </div>
           </form>
       </div>
-      <div class='mypage-footer'>
-      </div>
+      <div class='mypage-footer'></div>
     </div>
-    
+    <!-- page end -->
+
+    <!-- page start -->
+    <div id="in-out-page" class="mypage">
+      <div class="mypage-header">
+        <p class="font-weight-bold">古亭兒主闖關</p>
+      </div>
+      <div class="mypage-content show-qr-container">
+        <button type="button" class="btn btn-primary btn-lg btn-block m-1">IN</button>
+        <button type="button" class="btn btn-primary btn-lg btn-block m-1">OUT</button>
+      </div>
+      <div class='mypage-footer'></div>
+    </div>
+    <!-- page end -->
     
 
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.0.3.min.js') }}"></script>
