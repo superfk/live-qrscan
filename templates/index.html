@@ -18,7 +18,35 @@
         <button type="button" class="btn btn-primary btn-lg btn-block">我是關主</button>
         <button type="button" class="btn btn-primary btn-lg btn-block">我是組員</button>
       </div>
-      <div class='mypage-footer'></div>
+      <div class='mypage-footer'>
+        <img src="{{ url_for('static', filename='img/kt50.png') }}" class="img-fluid" alt="Responsive image">
+      </div>
+    </div>
+
+    <div id="login-page" class="mypage">
+      <div class="mypage-header">
+        <p class="font-weight-bold">古亭兒主闖關</p>
+      </div>
+      <div class="mypage-content">
+        <h4 class="text-center">請輸入關主密碼</h4>
+        <br>
+          <form class="form-inline">
+            <div class="form-group">
+              <h4 class="text-center">密碼</h4>
+              <input type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline">
+              <h4 class="text-center">你是哪關的關主</h4>
+              <select class="form-control form-control-lg">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </form>
+      </div>
+      <div class='mypage-footer'>
+      </div>
     </div>
     
     
