@@ -1,3 +1,5 @@
 Flask
+Flask_Socketio
 gunicorn
-uwsgi
+gevent
+gevent-websocket
