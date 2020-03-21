@@ -5,33 +5,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
     <link href="static/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="static/css/application.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="static/fontawesome/css/all.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="{{ url_for('static', filename='js/socket.io.js') }}"></script>
   </head>
   <body>
 
     <!-- page start -->
-    <div id="home-page" class="mypage">
+    <div class="mypage">
       <div class="mypage-header">
-        <p class="font-weight-bold">古亭兒主闖關</p>
+        <div>
+          <a id='back' href="#"><i class="fas fa-arrow-left fa-lg"></i></a>
+        </div>
+        <div id='main-title'>古亭兒主闖關</div>
+        <div id='systime'>0000/00/00 00:00:00</div>
       </div>
-      <div class="mypage-content">
-        <h4 class="text-center">請選擇身分</h4>
-        <button type="button" class="btn btn-primary btn-lg btn-block">我是關主</button>
-        <button type="button" class="btn btn-primary btn-lg btn-block">我是組員</button>
-      </div>
-      <div class='mypage-footer'>v0.9</div>
-    </div>
-    <!-- page end -->
 
-    <!-- page start -->
-    <div id="login-page" class="mypag">
-      <div class="mypage-header">
-        <p class="font-weight-bold">古亭兒主闖關</p>
-      </div>
       <div class="mypage-content">
-        <h4 class="text-center">請輸入關主密碼</h4>
-        <br>
+        <!-- home page -->
+        <div id="home-page" class='view'>
+          <h4 class="text-center">請選擇身分</h4>
+          <button id='iamOwner' type="button" class="btn btn-primary btn-lg btn-block">我是關主</button>
+          <button id='iamMember' type="button" class="btn btn-primary btn-lg btn-block">我是組員</button>
+        </div>
+
+        <!-- login page -->
+        <div id='login-page' class='view'>
+          <h4 class="text-center">請輸入關主密碼</h4>
+          <br>
           <form class="form-inline" id='owner_login_form'>
             <div class="form-group">
               <h4 class="text-center">密碼</h4>
@@ -45,27 +46,23 @@
                 <option>5</option>
               </select>
               <br>
-              <button type="button" class="btn btn-primary btn-lg btn-block">下一步</button>
+              <button type="submit" class="btn btn-primary btn-lg btn-block">下一步</button>
             </div>
           </form>
-      </div>
-      <div class='mypage-footer'></div>
-    </div>
-    <!-- page end -->
+        </div>
 
-    <!-- page start -->
-    <div id="in-out-page" class="mypage">
-      <div class="mypage-header">
-        <p class="font-weight-bold">古亭兒主闖關</p>
+        <!-- in out page -->
+        <div id='inout-page' class='view'>       
+          <button type="button" class="btn btn-primary btn-lg btn-block m-1">IN</button>
+          <button type="button" class="btn btn-primary btn-lg btn-block m-1">OUT</button>
+        </div>
       </div>
-      <div class="mypage-content show-qr-container">
-        <button type="button" class="btn btn-primary btn-lg btn-block m-1">IN</button>
-        <button type="button" class="btn btn-primary btn-lg btn-block m-1">OUT</button>
-      </div>
-      <div class='mypage-footer'></div>
+
+      <!-- footer -->
+      <div class='mypage-footer'>v0.9</div>
     </div>
     <!-- page end -->
-    
+   
 
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.0.3.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
