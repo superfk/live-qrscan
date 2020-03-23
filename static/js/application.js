@@ -48,6 +48,7 @@ backBtn.addEventListener('click', ()=>{
     $(backBtn).hide();
   }else if (curV.id === 'scan-page'){
     jbScanner.removeFrom(scannerParentElement);
+    scannerParentElement.innerHTML = '';
   }
 })
 
