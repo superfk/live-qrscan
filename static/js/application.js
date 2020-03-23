@@ -30,6 +30,7 @@ var qrcode = new QRCode(document.getElementById("qrcode"))
 
 let viewHistory = [];
 let whichGate = {gate:'', inout:'in'};
+let jsqrInited = false;
 
 // socket
 socket.on('connect', function() {
@@ -40,9 +41,12 @@ socket.on('connect', function() {
 // listener
 backBtn.addEventListener('click', ()=>{
   let lastV = showLastView();
+  let curV = getCurrentView();
   let isTop = lastV.id === 'home-page';
   if (isTop){
     $(backBtn).hide();
+  }else if (curV.id === 'scan-page'){
+    jbScanner.removeFrom(scannerParentElement);
   }
 })
 
@@ -52,7 +56,9 @@ iamOwnerBtn.addEventListener('click',()=>{
 })
 
 iamMemberBtn.addEventListener('click',()=>{
-  initJsQRScanner();
+  if(!jsqrInited){
+    initJsQRScanner();
+  }
   showView(pageScan);
   $("#scan-page .qrscan_text_info").hide();
   $(backBtn).show();
@@ -181,11 +187,12 @@ function initJsQRScanner(){
   {
       //append the jbScanner to an existing DOM element
     jbScanner.appendTo(scannerParentElement);
-  }  
+  }
+  jsqrInited = true;
 }
 
   //this function will be called when JsQRScanner is ready to use
 // function JsQRScannerReady()
 // {
-//     initJsQRScanner();        
+//   jsqrReady = true;      
 // }

@@ -92,7 +92,7 @@ html, body{
 
 .qrscanner video{
   max-width: 100%;
-  max-height: 100%;
+  max-height: 60%;
   }
 
 .qrscan_text_info {
@@ -100,6 +100,8 @@ html, body{
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  max-width: 100%;
 }
 
 .qrscan_text_info div{
@@ -111,3 +113,7 @@ html, body{
   color: green;
 }
 
+.qrscan_text_info > #scannedTextMemo{
+  max-width: 80%;
+  word-wrap: break-word;
+}
