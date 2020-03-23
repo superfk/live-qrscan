@@ -18,7 +18,7 @@
           <a id='back' href="#"><i class="fas fa-arrow-left fa-lg"></i></a>
         </div>
         <div id='main-title'>古亭兒主闖關</div>
-        <div id='systime'>0000/00/00 00:00:00</div>
+        <div id='systime'>00:00:00</div>
       </div>
 
       <div class="mypage-content">
@@ -29,6 +29,20 @@
           <button id='iamMember' type="button" class="btn btn-primary btn-lg btn-block">我是組員</button>
         </div>
 
+        <!-- member page -->
+        <div id='scan-page' class='view'>
+          <h4 class="text-center">請掃描關主給的QRCODE</h4>
+          <button id='startScan' type="button" class="btn btn-primary btn-lg btn-block m-1">開始掃描</button>
+          <button id='stopScan' type="button" class="btn btn-primary btn-lg btn-block m-1">停止掃描</button>
+          <br>      
+          <div id="scanner" class="qrscanner"></div>
+          <div class='qrscan_text_info' style='display: none;'>
+            <div><i class="fas fa-check" style='color:green'></i></div>
+            <div id='scannedTextMemo' class="alert alert-success" role="alert" ></div>
+          </div>
+          
+        </div>
+
         <!-- login page -->
         <div id='login-page' class='view'>
           <h4 class="text-center">請輸入關主密碼</h4>
@@ -37,6 +51,7 @@
             <div class="form-group">
               <h4 class="text-center">密碼</h4>
               <input type="password" id="ownerPW" name='password' class="form-control">
+              <div class="alert alert-danger" role="alert" style='display: none;'>密碼錯誤</div>
               <h4 class="text-center">你是哪關的關主</h4>
               <select class="form-control" name='gate'>
                 <option>1</option>
@@ -52,11 +67,23 @@
         </div>
 
         <!-- in out page -->
-        <div id='inout-page' class='view'>       
-          <button type="button" class="btn btn-primary btn-lg btn-block m-1">IN</button>
-          <button type="button" class="btn btn-primary btn-lg btn-block m-1">OUT</button>
+        <div id='inout-page' class='view'>
+          <h4 class="text-center">顯示QRCODE</h4>       
+          <button id='showInQr' type="button" class="btn btn-primary btn-lg btn-block m-1">IN</button>
+          <button id='showOutQr' type="button" class="btn btn-primary btn-lg btn-block m-1">OUT</button>
         </div>
+
+        <!-- QR code page -->
+        <div id='qrcode-page' class='view'>
+          <h4 class="text-center"></h4>       
+          <div id="qrcode" class="show-qr-container"></div>
+        </div>
+      
+        <!-- page-content end -->
       </div>
+
+      <!-- page end -->
+    </div>
 
       <!-- footer -->
       <div class='mypage-footer'>v0.9</div>
@@ -66,6 +93,8 @@
 
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.0.3.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/qrcode.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/JsQRScanner/jsqrscanner.nocache.js')}}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/application.js') }}"></script>
     
   </body>
