@@ -40,8 +40,9 @@ socket.on('connect', function() {
 
 // listener
 backBtn.addEventListener('click', ()=>{
-  let lastV = showLastView();
   let curV = getCurrentView();
+  let lastV = showLastView();
+  console.log(curV.id)
   let isTop = lastV.id === 'home-page';
   if (isTop){
     $(backBtn).hide();
