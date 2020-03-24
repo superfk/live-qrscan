@@ -179,17 +179,22 @@ function onQRCodeScanned(scannedText)
     	
     	if(scannedTextMemo)
     	{
-            // scannedTextMemo.innerText = scannedText;
-            scannedTextMemo.innerHTML = '<i class="fas fa-check"></i>掃描完成';            
+        let decodedObj = JSON.parse(scannedText);
+        decodedObj.groupName = gpName;
+        // scannedTextMemo.innerText = scannedText;
+        scannedTextMemo.innerHTML = `<i class="fas fa-check"></i>掃描完成
+                                      <div>隊名:${decodedObj.groupName}</div>
+                                      <div>關號:${decodedObj.gate}</div>
+                                      <div>類別:${decodedObj.inout}</div>`;            
 
-            $("#scan-page .qrscan_text_info").show();
-            let showAlert = setTimeout(()=>{
-              $("#scan-page .qrscan_text_info").hide();
-            },2000);
+        $("#scan-page .qrscan_text_info").show();
+        let showAlert = setTimeout(()=>{
+          $("#scan-page .qrscan_text_info").hide();
+        },2000);
 
-            let decodedObj = JSON.parse(scannedText);
-            decodedObj.groupName = gpName;
-            console.log(JSON.stringify(decodedObj));
+        
+        
+        console.log(JSON.stringify(decodedObj));
 
     	}
     }
@@ -211,10 +216,39 @@ function provideVideo()
     return Promise.reject('Your browser does not support getUserMedia');
 }
 
+//funtion returning a promise with a video stream
+function provideVideoQQ()
+{
+    return navigator.mediaDevices.enumerateDevices()
+    .then(function(devices) {
+        var exCameras = [];
+        devices.forEach(function(device) {
+        if (device.kind === 'videoinput') {
+          exCameras.push(device.deviceId)
+        }
+     });
+        
+        return Promise.resolve(exCameras);
+    }).then(function(ids){
+        if(ids.length === 0)
+        {
+          return Promise.reject('Could not find a webcam');
+        }
+        
+        return navigator.mediaDevices.getUserMedia({
+            video: {
+              'optional': [{
+                'sourceId': ids.length === 1 ? ids[0] : ids[1]//this way QQ browser opens the rear camera
+                }]
+            }
+        });        
+    });                
+} 
+
 function initJsQRScanner(){
   //create a new scanner passing to it a callback function that will be invoked when
   //the scanner succesfully scan a QR code
-  jbScanner = new JsQRScanner(onQRCodeScanned);
+  jbScanner = new JsQRScanner(onQRCodeScanned, provideVideoQQ);
   //reduce the size of analyzed images to increase performance on mobile devices
   jbScanner.setSnapImageMaxSize(3000);
   jbScanner.setScanInterval(250);
