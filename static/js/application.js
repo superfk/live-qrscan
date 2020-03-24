@@ -154,9 +154,13 @@ function onQRCodeScanned(scannedText)
     	
     	if(scannedTextMemo)
     	{
-            scannedTextMemo.innerText = scannedText;
+            // scannedTextMemo.innerText = scannedText;
+            scannedTextMemo.innerHTML = '<i class="fas fa-check"></i>掃描完成';            
 
             $("#scan-page .qrscan_text_info").show();
+            let showAlert = setTimeout(()=>{
+              $("#scan-page .qrscan_text_info").hide();
+            },2000);
 
     	}
     }

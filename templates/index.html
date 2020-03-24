@@ -34,12 +34,15 @@
           <h4 class="text-center">請掃描關主給的QRCODE</h4>
           <button id='startScan' type="button" class="btn btn-primary btn-lg btn-block m-1">開始掃描</button>
           <button id='stopScan' type="button" class="btn btn-primary btn-lg btn-block m-1">停止掃描</button>
-          <br>      
-          <div id="scanner" class="qrscanner"></div>
-          <div class='qrscan_text_info'>
-            <div><i class="fas fa-check" style='color:green'></i></div>
-            <div id='scannedTextMemo' class="alert alert-success" role="alert" ></div>
-          </div>
+          <br>
+          <div class='live-qr-container'>
+            <div id="scanner" class="qrscanner"></div>
+            <div class='qrscan_text_info'>
+              <div id='scannedTextMemo' class="alert alert-success" role="alert" ></div>
+            </div>
+
+          </div>      
+          
           
         </div>
 
