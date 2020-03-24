@@ -29,6 +29,7 @@ let inQrBtn = document.getElementById('showInQr');
 let outQrBtn = document.getElementById('showOutQr');
 
 var qrcode = new QRCode(document.getElementById("qrcode"))
+var debugMsg = document.getElementById("debugMsg");
 
 let curGroup = document.getElementById('curGroup');
 
@@ -41,6 +42,20 @@ let jsqrInited = false;
 socket.on('connect', function() {
   socket.emit('my event', {data: 'connected!'});
   init();
+  let queryStatus = setInterval(getStatus,5000)
+})
+
+socket.on('reply', function(data) {
+  console.log(data)
+  debugMsg.innerText = JSON.stringify(data);
+
+})
+
+socket.on('status', function(data) {
+  console.log(data)
+  // debug only
+  // debugMsg.innerText = JSON.stringify(data);
+
 })
 
 // listener
@@ -131,6 +146,10 @@ stopScanBtn.addEventListener('click', ()=>{
 })
 
 // functions
+function getStatus(){
+  socket.emit('show status', whichGate);
+}
+
 let monitorTime = setInterval(()=>{
   let currentDate = new Date();
   systemTime.innerHTML = currentDate.toLocaleTimeString();
@@ -192,7 +211,9 @@ function onQRCodeScanned(scannedText)
           $("#scan-page .qrscan_text_info").hide();
         },2000);
 
-        
+        // save data to server
+
+        socket.emit('check in', decodedObj);
         
         console.log(JSON.stringify(decodedObj));
 
@@ -260,8 +281,10 @@ function initJsQRScanner(){
   jsqrInited = true;
 }
 
-  //this function will be called when JsQRScanner is ready to use
-// function JsQRScannerReady()
-// {
-//   jsqrReady = true;      
-// }
+
+// plot function
+var myBarChart = new Chart(ctx, {
+  type: 'bar',
+  data: data,
+  options: options
+});

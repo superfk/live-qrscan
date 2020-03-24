@@ -1,5 +1,6 @@
 Flask
 Flask_Socketio
+Flask_SQLAlchemy
 gunicorn
 gevent
 gevent-websocket
