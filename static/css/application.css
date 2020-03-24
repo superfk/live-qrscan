@@ -140,3 +140,11 @@ html, body{
   border: 0px;
   font-weight: bolder;
 }
+
+#curGroup {
+  font-size: 2rem;
+  color: #2980b9;
+  border: 1px solid #95a5a6;
+  border-radius: 5px;
+  padding:5px; 
+}

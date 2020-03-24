@@ -29,8 +29,24 @@
           <button id='iamMember' type="button" class="btn btn-primary btn-lg btn-block">我是組員</button>
         </div>
 
+        <!-- member gate select page -->
+        <div id='whichgroup-page' class='view'>
+          <h4 class="text-center">請輸入隊名</h4>
+          <br>
+          <form class="form-inline" id='group_name_input_form'>
+            <div class="form-group">
+              <h4 class="text-center">隊名</h4>
+              <input type="text" id="groupName" name='group_name' class="form-control">
+              <div class="alert alert-danger" role="alert" style='display: none;'>請輸入隊名</div>
+              <br>
+              <button type="submit" class="btn btn-primary btn-lg btn-block">確認</button>
+            </div>
+          </form>    
+        </div>
+
         <!-- member page -->
         <div id='scan-page' class='view'>
+          <div id='curGroup' class="text-center alert alert-primary" role="alert"></div>
           <h4 class="text-center">請掃描關主給的QRCODE</h4>
           <button id='startScan' type="button" class="btn btn-primary btn-lg btn-block m-1">開始掃描</button>
           <button id='stopScan' type="button" class="btn btn-primary btn-lg btn-block m-1">停止掃描</button>
@@ -40,10 +56,7 @@
             <div class='qrscan_text_info'>
               <div id='scannedTextMemo' class="alert alert-success" role="alert" ></div>
             </div>
-
-          </div>      
-          
-          
+          </div>     
         </div>
 
         <!-- login page -->

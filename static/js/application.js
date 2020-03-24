@@ -7,6 +7,7 @@ let backBtn = document.getElementById('back');
 let systemTime = document.getElementById('systime');
 
 let pageHome = document.getElementById('home-page');
+let pageGroup = document.getElementById('whichgroup-page');
 let pageScan = document.getElementById('scan-page');
 let pageLogin = document.getElementById('login-page');
 let pageInOut = document.getElementById('inout-page');
@@ -14,6 +15,7 @@ let pageQR = document.getElementById('qrcode-page')
 
 let iamOwnerBtn = document.getElementById('iamOwner');
 let iamMemberBtn = document.getElementById('iamMember');
+let groupInputForm = document.getElementById('group_name_input_form');
 let ownerLoginForm = document.getElementById('owner_login_form');
 
 let jbScanner;
@@ -28,8 +30,11 @@ let outQrBtn = document.getElementById('showOutQr');
 
 var qrcode = new QRCode(document.getElementById("qrcode"))
 
+let curGroup = document.getElementById('curGroup');
+
+let gpName = '__not_defined'
 let viewHistory = [];
-let whichGate = {gate:'', inout:'in'};
+let whichGate = {groupName:gpName, gate:'', inout:'in'};
 let jsqrInited = false;
 
 // socket
@@ -49,6 +54,7 @@ backBtn.addEventListener('click', ()=>{
   }else if (curV.id === 'scan-page'){
     jbScanner.removeFrom(scannerParentElement);
     scannerParentElement.innerHTML = '';
+    jsqrInited = false;
   }
 })
 
@@ -58,12 +64,29 @@ iamOwnerBtn.addEventListener('click',()=>{
 })
 
 iamMemberBtn.addEventListener('click',()=>{
-  if(!jsqrInited){
-    initJsQRScanner();
-  }
-  showView(pageScan);
-  $("#scan-page .qrscan_text_info").hide();
+  showView(pageGroup);
   $(backBtn).show();
+})
+
+groupInputForm.addEventListener('submit',(e)=>{
+  e.preventDefault();
+  let inputGpName = groupInputForm.elements.namedItem("group_name").value;
+  if (inputGpName === ''){
+    $("#whichgroup-page .alert").show();
+    let showAlert = setTimeout(()=>{
+      $("#whichgroup-page .alert").hide();
+    },1500);
+  }else{
+    if(!jsqrInited){
+      initJsQRScanner();
+    }
+    gpName = inputGpName;
+    curGroup.innerHTML = "我的小隊: " + inputGpName;
+    $("#scan-page .qrscan_text_info").hide();
+    showView(pageScan);
+    $(backBtn).show();
+  }
+  
 })
 
 ownerLoginForm.addEventListener('submit',(e)=>{
@@ -87,6 +110,7 @@ inQrBtn.addEventListener('click', ()=>{
   showView(pageQR);
   $(pageQR).find('h4').html('通關開始QRCODE');
   whichGate.inout = 'in';
+  whichGate.groupName = '__not_defined';
   qrcode.makeCode(JSON.stringify(whichGate));
 })
 
@@ -94,6 +118,7 @@ outQrBtn.addEventListener('click', ()=>{
   showView(pageQR);
   $(pageQR).find('h4').html('通關結束QRCODE');
   whichGate.inout = 'out';
+  whichGate.groupName = '__not_defined';
   qrcode.makeCode(JSON.stringify(whichGate));
 })
 
@@ -161,6 +186,10 @@ function onQRCodeScanned(scannedText)
             let showAlert = setTimeout(()=>{
               $("#scan-page .qrscan_text_info").hide();
             },2000);
+
+            let decodedObj = JSON.parse(scannedText);
+            decodedObj.groupName = gpName;
+            console.log(JSON.stringify(decodedObj));
 
     	}
     }
