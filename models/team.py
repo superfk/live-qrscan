@@ -25,12 +25,14 @@ class TeamModel(db.Model):
     @classmethod
     def find_all_team(cls):
         all_teams = [row.name for row in cls.query.group_by(cls.id,cls.name).all()]
+        all_teams = list(set(all_teams))
         return all_teams
 
     @classmethod
     def find_all_gate(cls):
-        all_teams = [row.gate for row in cls.query.group_by(cls.id,cls.gate).all()]
-        return all_teams
+        all_gates = [row.gate for row in cls.query.group_by(cls.id,cls.gate).all()]
+        all_gates = list(set(all_gates))
+        return all_gates
 
     @classmethod
     def find_checkin(cls, name, gate):
