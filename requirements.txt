@@ -5,4 +5,3 @@ gunicorn
 gevent
 gevent-websocket
 psycopg2
-uwsgi

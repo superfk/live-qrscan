@@ -9,7 +9,6 @@ from models.team import TeamModel
 from db import db
 
 app = Flask(__name__, static_url_path="/static")
-app.debug = 'DEBUG' in os.environ
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -17,8 +16,6 @@ app.config['PROPAGATE_EXCEPTIONS'] = True
 app.secret_key = 'shawn'
 
 socketio  = SocketIO(app)
-
-db.init_app(app)
 
 @app.before_first_request
 def create_tables():
@@ -55,5 +52,6 @@ def show_status(data):
     return emit('status', {'data':ret}, broadcast=True)
 
 if __name__=="__main__":
-    socketio.run(app, debug=True)
+    db.init_app(app)
+    socketio.run(app)
 
