@@ -24,7 +24,6 @@ socketio  = SocketIO(app)
 def create_tables():
     db.init_app(app)
     db.create_all()
-    socketio.run(app, debug=True)
 
 @app.route('/')
 def hello():
@@ -57,6 +56,5 @@ def show_status(data):
     return socketio.emit('status', {'data':ret})
 
 if __name__=="__main__":
-    db.init_app(app)
     socketio.run(app, debug=True)
 
