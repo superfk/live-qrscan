@@ -4,6 +4,7 @@ var port = '5000';
 var socket = io.connect(url + ':' + port);
 
 let backBtn = document.getElementById('back');
+let showStatusBtn = document.getElementById('showStatus');
 let systemTime = document.getElementById('systime');
 
 let pageHome = document.getElementById('home-page');
@@ -12,6 +13,7 @@ let pageScan = document.getElementById('scan-page');
 let pageLogin = document.getElementById('login-page');
 let pageInOut = document.getElementById('inout-page');
 let pageQR = document.getElementById('qrcode-page')
+let pageLive  = document.getElementById('dashboard-page');
 
 let iamOwnerBtn = document.getElementById('iamOwner');
 let iamMemberBtn = document.getElementById('iamMember');
@@ -33,6 +35,37 @@ var debugMsg = document.getElementById("debugMsg");
 
 let curGroup = document.getElementById('curGroup');
 
+let ctx = document.getElementById('liveChart').getContext('2d');
+let chartData = {
+  labels: [],
+  datasets: []
+};
+
+let liveStatusChart = new Chart(ctx, {
+  type: 'horizontalBar',
+  data: chartData,
+  options: {
+      // Elements options apply to all of the options unless overridden in a dataset
+      // In this case, we are setting the border of each horizontal bar to be 2px wide
+      elements: {
+          rectangle: {
+              borderWidth: 2,
+          }
+      },
+      responsive: true,
+      legend: {
+        display: false,
+      },
+      title: {
+          display: true,
+          text: '即時資訊'
+      }
+  }
+});
+
+var color = Chart.helpers.color;
+
+
 let gpName = '__not_defined'
 let viewHistory = [];
 let whichGate = {groupName:gpName, gate:'', inout:'in'};
@@ -52,13 +85,18 @@ socket.on('reply', function(data) {
 })
 
 socket.on('status', function(data) {
-  console.log(data)
+  console.log(data);
+  updateLiveStatus(liveStatusChart, data.data)
   // debug only
   // debugMsg.innerText = JSON.stringify(data);
 
 })
 
 // listener
+showStatusBtn.addEventListener('click', ()=>{
+  $(pageLive).toggleClass('view-shown');
+})
+
 backBtn.addEventListener('click', ()=>{
   let curV = getCurrentView();
   let lastV = showLastView();
@@ -283,8 +321,27 @@ function initJsQRScanner(){
 
 
 // plot function
-var myBarChart = new Chart(ctx, {
-  type: 'bar',
-  data: data,
-  options: options
-});
+function updateLiveStatus(chart, data) {
+  console.log(data)
+
+  // get team names
+  let label = data.map((element)=>{
+    return element.groupName;
+  })
+  // get interval
+  let interv = data.map((element)=>{
+    let inv = element.intv ===''?0:parseFloat(element.intv);
+    return inv;
+  })
+  console.log(label)
+  console.log(interv)
+
+  chart.data.labels = label;
+  chart.data.datasets = [{
+    label: '',
+    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+    borderColor: 'rgba(255, 99, 132, 1)',
+    data: interv
+}];
+  chart.update();
+}

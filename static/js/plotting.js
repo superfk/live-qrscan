@@ -35,7 +35,7 @@ var horizontalBarChartData = {
 };
 
 window.onload = function() {
-    var ctx = document.getElementById('canvas').getContext('2d');
+    var ctx = document.getElementById('liveChart').getContext('2d');
     window.myHorizontalBar = new Chart(ctx, {
         type: 'horizontalBar',
         data: horizontalBarChartData,
@@ -49,11 +49,11 @@ window.onload = function() {
             },
             responsive: true,
             legend: {
-                position: 'right',
+                position: 'left',
             },
             title: {
                 display: true,
-                text: 'Chart.js Horizontal Bar Chart'
+                text: '即時資訊'
             }
         }
     });

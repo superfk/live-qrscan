@@ -52,20 +52,18 @@ class TeamModel(db.Model):
         print(all_gates)
         all_status = []
         for t in all_teams:
+            server_data = { 'groupName':t, 'intv':0}
+            total_intv = 0.0
             for g in all_gates:
-                server_data = { 'groupName':t, 'start':'','end':'','intv':'', 'gate':g}
                 start = cls.find_checkin(t, g)
-                if start:
-                    server_data['start'] = start.strftime("%Y-%m-%d %H:%M:%S.%f")
                 end = cls.find_checkout(t, g)
-                if end:
-                    server_data['end'] = end.strftime("%Y-%m-%d %H:%M:%S.%f")
                 if start and end:
                     # startT = datetime.datetime.strptime(start,"%Y-%m-%d %H:%M:%D.%f")
                     # endT = datetime.datetime.strptime(end,"%Y-%m-%d %H:%M:%D.%f")
                     difference = end - start
-                    server_data['intv'] = difference.total_seconds()
-                all_status.append(server_data)
+                    total_intv += difference.total_seconds()
+            server_data['intv'] = total_intv
+            all_status.append(server_data)
         return all_status
 
     def save_to_db(self):

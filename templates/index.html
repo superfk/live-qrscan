@@ -17,7 +17,13 @@
         <div>
           <a id='back' href="#"><i class="fas fa-arrow-left fa-lg"></i></a>
         </div>
-        <div id='main-title'>古亭兒主闖關</div>
+        <div id='main-title'>
+          <div>古亭兒主闖關</div>
+          <a href="#" id='showStatus'><i class="fas fa-chart-bar fa-lg"></i></a>
+        </div>
+        <div>
+          
+        </div>
         <div id='systime'>00:00:00</div>
       </div>
 
@@ -95,6 +101,8 @@
           <div id="qrcode" class="show-qr-container"></div>
         </div>
       
+        
+
         <!-- page-content end -->
       </div>
 
@@ -104,6 +112,12 @@
         <div id='debugMsg'></div>
       </div>
     </div>
+    <!-- live Status page -->
+    <div id='dashboard-page' class='dashboard'>    
+      <div class="liveChart-container">
+        <canvas id="liveChart"></canvas>
+      </div>
+    </div>
     <!-- page end -->
    
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
@@ -111,7 +125,6 @@
     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/qrcode.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/JsQRScanner/jsqrscanner.nocache.js')}}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/plotting.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/application.js') }}"></script>
     
   </body>
