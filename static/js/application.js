@@ -1,5 +1,5 @@
 var url = 'https://live-qrscan.herokuapp.com';
-var url = 'http://127.0.0.1'
+// var url = 'http://127.0.0.1'
 var port = '5000';
 var socket = io.connect(url + ':' + port);
 
@@ -187,6 +187,7 @@ stopScanBtn.addEventListener('click', ()=>{
 })
 
 switchCamBtn.addEventListener('click', (event)=>{
+  console.log(camDirection)
   if (typeof currentStream !== 'undefined') {
     stopMediaTracks(currentStream);
   }
