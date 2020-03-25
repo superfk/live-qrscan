@@ -6,6 +6,7 @@ import logging
 from flask import Flask, render_template, url_for
 from flask_socketio import SocketIO, emit
 from models.team import TeamModel
+from db import db
 
 app = Flask(__name__, static_url_path="/static")
 app.debug = 'DEBUG' in os.environ
@@ -19,6 +20,7 @@ socketio  = SocketIO(app)
 
 @app.before_first_request
 def create_tables():
+    db.init_app(app)
     db.create_all()
 
 @app.route('/')
@@ -52,7 +54,6 @@ def show_status(data):
     return socketio.emit('status', {'data':ret})
 
 if __name__=="__main__":
-    from db import db
     db.init_app(app)
     socketio.run(app, debug=True)
 
