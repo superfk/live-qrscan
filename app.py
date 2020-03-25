@@ -10,7 +10,8 @@ from db import *
 
 app = Flask(__name__, static_url_path="/static")
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('sqlite:///data.db','DATABASE_URL')
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///data.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.secret_key = 'shawn'
