@@ -10,18 +10,19 @@ from db import *
 
 app = Flask(__name__, static_url_path="/static")
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///data.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('sqlite:///data.db','DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.secret_key = 'shawn'
 
 db = SQLAlchemy(app)
 db.init_app(app)
+db.create_all()
 socketio  = SocketIO(app, manage_session=True)
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
+# @app.before_first_request
+# def create_tables():
+#     db.create_all()
 
 @app.route('/')
 def hello():
