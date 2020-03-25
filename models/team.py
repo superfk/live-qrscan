@@ -9,7 +9,7 @@ class TeamModel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    time_stamp = db.Column(db.DateTime, default=datetime.datetime.utcnow())
+    time_stamp = db.Column(db.DateTime, default=datetime.datetime.now())
     gate = db.Column(db.Integer)
     inout = db.Column(db.String(10))
 

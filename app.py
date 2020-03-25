@@ -30,7 +30,7 @@ def hello():
 @socketio.on('check in')
 def check_in(data):
     server_data = { 'groupName':data['groupName'],
-                    'time_stamp':datetime.datetime.utcnow(),
+                    'time_stamp':datetime.datetime.now(),
                     'gate':data['gate'],
                     'inout':data['inout']
                    }
