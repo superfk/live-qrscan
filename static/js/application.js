@@ -21,6 +21,7 @@ let groupInputForm = document.getElementById('group_name_input_form');
 let ownerLoginForm = document.getElementById('owner_login_form');
 
 let jbScanner;
+let switchCamBtn = document.getElementById("switchCam");
 let scannerParentElement = document.getElementById("scanner");
 let scannedTextMemo = document.getElementById("scannedTextMemo");
 
@@ -65,7 +66,8 @@ let liveStatusChart = new Chart(ctx, {
 
 var color = Chart.helpers.color;
 
-
+let currentStream;
+let camDirection = true; // true is rear cam
 let gpName = '__not_defined'
 let viewHistory = [];
 let whichGate = {groupName:gpName, gate:'', inout:'in'};
@@ -184,7 +186,45 @@ stopScanBtn.addEventListener('click', ()=>{
   jbScanner.stopScanning();
 })
 
+switchCamBtn.addEventListener('click', (event)=>{
+  if (typeof currentStream !== 'undefined') {
+    stopMediaTracks(currentStream);
+  }
+  const videoConstraints = {};
+  if (camDirection) {
+    videoConstraints.facingMode = 'environment';
+  } else {
+    videoConstraints.facingMode = 'user';
+  }
+  const constraints = {
+    video: videoConstraints,
+    audio: false
+  };
+
+  navigator.mediaDevices
+    .getUserMedia(constraints)
+    .then(stream => {
+      let video = document.querySelector('#scanner video');
+      console.log(video)
+      currentStream = stream;
+      video.srcObject = stream;
+      return navigator.mediaDevices.enumerateDevices();
+    })
+    .then(gotDevices=>{
+      camDirection = !camDirection;
+    })
+    .catch(error => {
+      console.error(error);
+    });
+})
+
 // functions
+function stopMediaTracks(stream) {
+  stream.getTracks().forEach(track => {
+    track.stop();
+  });
+}
+
 function getStatus(){
   socket.emit('show status', whichGate);
 }
@@ -234,8 +274,8 @@ function getCurrentView(){
 function onQRCodeScanned(scannedText)
 
     {
-    	
-    	if(scannedTextMemo)
+    	console.log(scannedText)
+    	if(scannedText)
     	{
         let decodedObj = JSON.parse(scannedText);
         decodedObj.groupName = gpName;
@@ -296,11 +336,8 @@ function provideVideoQQ()
         }
         
         return navigator.mediaDevices.getUserMedia({
-            video: {
-              'optional': [{
-                'sourceId': ids.length === 1 ? ids[0] : ids[1]//this way QQ browser opens the rear camera
-                }]
-            }
+            audio: false,
+            video: true
         });        
     });                
 } 

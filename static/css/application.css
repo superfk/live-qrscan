@@ -113,6 +113,17 @@ html, body{
   height: 100%;
 }
 
+#switchCam {
+  text-decoration: none;
+  display: -webkit-box;   /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;  /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
 .show-qr-container img {
   width: 100%;
 
@@ -134,8 +145,8 @@ html, body{
 }
 
 .qrscanner video{
-  max-width: 100%;
-  max-height: 60%;
+  max-width: 100% !important;
+  max-height: 60% !important;
   }
 
 .qrscan_text_info {
