@@ -1,7 +1,7 @@
-var url = 'https://live-qrscan.herokuapp.com' + ':' + location.port;
-// var url = 'http://127.0.0.1:5000'
+var url = 'https://live-qrscan.herokuapp.com:5000';
+var url = 'http://127.0.0.1:5000'
 var port = '5000';
-var socket = io.connect(url);
+var socket;
 
 let backBtn = document.getElementById('back');
 let showStatusBtn = document.getElementById('showStatus');
@@ -74,26 +74,34 @@ let whichGate = {groupName:gpName, gate:'', inout:'in'};
 let jsqrInited = false;
 
 // socket
-socket.on('connect', function() {
-  socket.emit('my event', {data: 'connected!'});
-  init();
-  let queryStatus = setInterval(getStatus,5000)
+
+$(document).ready(()=>{
+  
+  socket = io.connect(url);
+
+  socket.on('connect', function() {
+    socket.emit('my event', {data: 'connected!'});
+    init();
+    let queryStatus = setInterval(getStatus,5000)
+  })
+  
+  socket.on('reply', function(data) {
+    console.log(data)
+    // debug only
+    // debugMsg.innerText = JSON.stringify(data);
+  
+  })
+  
+  socket.on('status', function(data) {
+    console.log(data);
+    updateLiveStatus(liveStatusChart, data.data)
+    // debug only
+    debugMsg.innerText = JSON.stringify(data);
+  
+  })
+
 })
 
-socket.on('reply', function(data) {
-  console.log(data)
-  // debug only
-  // debugMsg.innerText = JSON.stringify(data);
-
-})
-
-socket.on('status', function(data) {
-  console.log(data);
-  updateLiveStatus(liveStatusChart, data.data)
-  // debug only
-  debugMsg.innerText = JSON.stringify(data);
-
-})
 
 // listener
 showStatusBtn.addEventListener('click', ()=>{
