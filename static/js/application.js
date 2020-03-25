@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(data);
     updateLiveStatus(liveStatusChart, data.data)
     // debug only
-    debugMsg.innerText = JSON.stringify(data);
+    // debugMsg.innerText = JSON.stringify(data);
   
   })
 
