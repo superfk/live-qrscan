@@ -1,8 +1,9 @@
-Flask
-Flask_Socketio
-Flask_SQLAlchemy
-gunicorn
-gevent
-gevent-websocket
-psycopg2
-uwsgi
+Flask==1.0.2
+Flask-SocketIO==3.3.2
+Flask-SQLAlchemy==2.3.2
+gevent==1.4.0
+gevent-websocket==0.10.1
+greenlet==0.4.15
+gunicorn==19.9.0
+psycopg2==2.7.7
+SQLAlchemy==1.3.1
