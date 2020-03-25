@@ -80,7 +80,8 @@ socket.on('connect', function() {
 
 socket.on('reply', function(data) {
   console.log(data)
-  debugMsg.innerText = JSON.stringify(data);
+  // debug only
+  // debugMsg.innerText = JSON.stringify(data);
 
 })
 
