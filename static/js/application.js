@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let jsqrInited = false;
 
   // socket
-  let socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+  let socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port, {transports: ['websocket']});
 
   socket.on('connect', function() {
     socket.emit('my event', {data: 'connected!'});

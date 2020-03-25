@@ -45,7 +45,7 @@ class TeamModel(db.Model):
             return all_data[-1].time_stamp
 
     @classmethod
-    def find_interval(cls, name=None, gate=None):
+    def find_interval(cls):
         all_teams = cls.find_all_team()
         print(all_teams)
         all_gates = cls.find_all_gate()
@@ -64,7 +64,8 @@ class TeamModel(db.Model):
                     total_intv += difference.total_seconds()
             server_data['intv'] = total_intv
             all_status.append(server_data)
-        return all_status
+        if len(all_status) > 0:
+            return all_status
 
     def save_to_db(self):
         db.session.add(self)

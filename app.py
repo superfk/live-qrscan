@@ -49,9 +49,9 @@ def show_status(data):
                     time_stamp='',
                     gate=1,
                     inout='') # data = {groupName:gpName, gate:'', inout:'in'};
-    ret = prog.find_interval(name=data['groupName'],gate=data['gate'])
-    print(ret)
-    emit('status', {'data':ret}, broadcast=True)
+    ret = prog.find_interval()
+    if ret:
+        emit('status', {'data':ret}, broadcast=True)
 
 if __name__=="__main__":
     app.run(debug=True)
