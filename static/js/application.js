@@ -1,6 +1,6 @@
 var url = 'https://live-qrscan.herokuapp.com';
 // var url = 'http://127.0.0.1'
-var port = '5000';
+var port = '10001';
 var socket = io.connect(url + ':' + port);
 
 let backBtn = document.getElementById('back');
@@ -91,7 +91,7 @@ socket.on('status', function(data) {
   console.log(data);
   updateLiveStatus(liveStatusChart, data.data)
   // debug only
-  // debugMsg.innerText = JSON.stringify(data);
+  debugMsg.innerText = JSON.stringify(data);
 
 })
 
