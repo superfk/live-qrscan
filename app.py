@@ -53,7 +53,7 @@ def show_status(data):
                     inout='') # data = {groupName:gpName, gate:'', inout:'in'};
     ret = prog.find_interval(name=data['groupName'],gate=data['gate'])
     print(ret)
-    return socketio.emit('status', {'data':ret})
+    return emit('status', {'data':ret}, broadcast=True)
 
 if __name__=="__main__":
     socketio.run(app, debug=True, port=5000)
