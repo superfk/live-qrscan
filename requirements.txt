@@ -4,3 +4,4 @@ Flask_SQLAlchemy
 gunicorn
 gevent
 gevent-websocket
+psycopg2
