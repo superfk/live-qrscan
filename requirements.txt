@@ -4,4 +4,5 @@ Flask_SQLAlchemy
 gunicorn
 gevent
 gevent-websocket
+eventlet
 psycopg2

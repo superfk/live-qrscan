@@ -22,7 +22,9 @@ socketio  = SocketIO(app)
 
 @app.before_first_request
 def create_tables():
+    db.init_app(app)
     db.create_all()
+    socketio.run(app, debug=True)
 
 @app.route('/')
 def hello():
