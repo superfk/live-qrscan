@@ -56,5 +56,5 @@ def show_status(data):
     return socketio.emit('status', {'data':ret})
 
 if __name__=="__main__":
-    socketio.run(app, debug=True, port=10001)
+    socketio.run(app, debug=True, port=17051)
 
