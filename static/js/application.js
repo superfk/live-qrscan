@@ -1,4 +1,4 @@
-var url = 'https://live-qrscan.herokuapp.com';
+var url = 'https://live-qrscan.herokuapp.com' + ':' + location.port;
 // var url = 'http://127.0.0.1:5000'
 var port = '5000';
 var socket = io.connect(url);

@@ -7,7 +7,6 @@
     <link href="static/css/application.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="static/fontawesome/css/all.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="{{ url_for('static', filename='js/socket.io.js') }}"></script>
   </head>
   <body>
 
@@ -120,7 +119,7 @@
       </div>
     </div>
     <!-- page end -->
-   
+    <script src="{{ url_for('static', filename='js/socket.io.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.0.3.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
