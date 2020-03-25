@@ -1,7 +1,7 @@
-var url = 'https://live-qrscan.herokuapp.com' + ":5000";
+var url = 'https://live-qrscan.herokuapp.com';
 // var url = 'http://127.0.0.1:5000'
 var port = '5000';
-var socket = io(url);
+var socket = io.connect(url);
 
 let backBtn = document.getElementById('back');
 let showStatusBtn = document.getElementById('showStatus');

@@ -15,6 +15,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.secret_key = 'shawn'
 
+
+db.init_app(app)
 socketio  = SocketIO(app)
 
 @app.before_first_request
@@ -52,6 +54,5 @@ def show_status(data):
     return emit('status', {'data':ret}, broadcast=True)
 
 if __name__=="__main__":
-    db.init_app(app)
-    socketio.run(app)
+    app.run()
 
