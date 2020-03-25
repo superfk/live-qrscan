@@ -15,7 +15,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite://
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.secret_key = 'shawn'
-ailed: WebSocket is closed before the connection is established.
+
+db.init_app(app)
 socketio  = SocketIO(app)
 
 @app.before_first_request
