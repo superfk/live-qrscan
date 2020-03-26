@@ -7,7 +7,7 @@ from flask import Flask, render_template, url_for, json
 from werkzeug.exceptions import HTTPException
 from flask_socketio import SocketIO, emit
 from models.team import TeamModel
-from db import *
+from db import db
 
 app = Flask(__name__, static_url_path="/static")
 
@@ -17,9 +17,12 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.secret_key = 'shawn'
 
-db = SQLAlchemy(app)
 db.init_app(app)
 socketio  = SocketIO(app, manage_session=True)
+
+with app.app_context():
+    # your code here
+    db.create_all()
 
 @app.before_first_request
 def create_tables():
