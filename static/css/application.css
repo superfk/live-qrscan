@@ -141,13 +141,23 @@ html, body{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 60%;
+  height: 40%;
 }
 
-.qrscanner video{
-  max-width: 50% !important;
-  max-height: 40% !important;
-  justify-self: center;
+.qrscanner > div{
+  height: 100%;
+}
+
+.qrscanner > div > video{
+  display: -webkit-box;   /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;  /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .qrscan_text_info {

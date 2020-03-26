@@ -20,12 +20,9 @@ app.secret_key = 'shawn'
 db.init_app(app)
 socketio  = SocketIO(app, manage_session=True)
 
+# create table when 
 with app.app_context():
     # your code here
-    db.create_all()
-
-@app.before_first_request
-def create_tables():
     db.create_all()
 
 @app.route('/')
