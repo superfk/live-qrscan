@@ -1,7 +1,9 @@
 import sqlite3
 import datetime
 from db import db
-import time
+import time, os
+
+MAX_GATE = os.environ.get('MAX_GATE',7)
 
 
 class TeamModel(db.Model):
@@ -53,7 +55,7 @@ class TeamModel(db.Model):
         all_gates = cls.find_all_gate()
         print(all_gates)
         all_status = []
-        max_gate = 7
+        mx_gate = int(MAX_GATE)
         for t in all_teams:
             server_data = {'intv':0, 'groupName':t, 'for_sorting':999999999999.9999, 'done':False}
             total_intv = 0.0
@@ -70,7 +72,7 @@ class TeamModel(db.Model):
             if total_intv > 0.0:
                 server_data['intv'] = total_intv
                 server_data['for_sorting'] = total_intv
-                if gate_counter >= max_gate:
+                if gate_counter >= mx_gate:
                     server_data['done'] = True
             else:
                 server_data['intv'] = 0.0
