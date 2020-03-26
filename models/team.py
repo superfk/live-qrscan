@@ -54,7 +54,7 @@ class TeamModel(db.Model):
         print(all_gates)
         all_status = []
         for t in all_teams:
-            server_data = {'intv':0, 'groupName':t}
+            server_data = {'intv':0, 'groupName':t, 'for_sorting':999999999999.9999}
             total_intv = 0.0
             for g in all_gates:
                 start = cls.find_checkin(t, g)
@@ -64,10 +64,14 @@ class TeamModel(db.Model):
                     # endT = datetime.datetime.strptime(end,"%Y-%m-%d %H:%M:%D.%f")
                     difference = end - start
                     total_intv += difference.total_seconds()
-            server_data['intv'] = total_intv
+            if total_intv > 0.0:
+                server_data['intv'] = total_intv
+                server_data['for_sorting'] = total_intv
+            else:
+                server_data['intv'] = 0.0
             all_status.append(server_data)
         if len(all_status) > 0:
-            sortIntvList = sorted(all_status, key=lambda k: k['intv'])
+            sortIntvList = sorted(all_status, key=lambda k: k['for_sorting'] )
             return sortIntvList
 
     def save_to_db(self):
