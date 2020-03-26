@@ -67,7 +67,9 @@ class TeamModel(db.Model):
                     # startT = datetime.datetime.strptime(start,"%Y-%m-%d %H:%M:%D.%f")
                     # endT = datetime.datetime.strptime(end,"%Y-%m-%d %H:%M:%D.%f")
                     difference = end - start
-                    total_intv += difference.total_seconds()
+                    intv = difference.total_seconds()
+                    intv = intv if intv >= 0 else 0.0 
+                    total_intv += intv
                     gate_counter += 1
             if total_intv > 0.0:
                 server_data['intv'] = total_intv
