@@ -376,11 +376,16 @@ document.addEventListener('DOMContentLoaded', () => {
       return inv;
     })
 
+    // get done
+    let barColor = data.map((element)=>{
+      return element.done?'#16a085':'#c0392b';
+    })
+
     chart.data.labels = label;
     chart.data.datasets = [{
       label: '',
-      backgroundColor: 'rgba(255, 99, 132, 0.2)',
-      borderColor: 'rgba(255, 99, 132, 1)',
+      backgroundColor: barColor,
+      borderColor: '#2c3e50',
       data: interv
   }];
     chart.update();
