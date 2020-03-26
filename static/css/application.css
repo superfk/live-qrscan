@@ -147,7 +147,8 @@ html, body{
 .qrscanner video{
   max-width: 50% !important;
   max-height: 40% !important;
-  }
+  justify-self: center;
+}
 
 .qrscan_text_info {
   display: -webkit-box;   /* OLD - iOS 6-, Safari 3.1-6, BB7 */

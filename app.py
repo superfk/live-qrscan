@@ -3,7 +3,8 @@
 import os, json
 import datetime
 import logging
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, json
+from werkzeug.exceptions import HTTPException
 from flask_socketio import SocketIO, emit
 from models.team import TeamModel
 from db import *
@@ -29,21 +30,39 @@ socketio  = SocketIO(app, manage_session=True)
 def hello():
     return render_template('index.html')
 
+@app.errorhandler(HTTPException)
+def handle_exception(e):
+    """Return JSON instead of HTML for HTTP errors."""
+    # start with the correct headers and status code from the error
+    response = e.get_response()
+    # replace the body with JSON
+    response.data = json.dumps({
+        "code": e.code,
+        "name": e.name,
+        "description": e.description,
+    })
+    response.content_type = "application/json"
+    return response
+
 @socketio.on('check in')
 def check_in(data):
     server_data = { 'groupName':data['groupName'],
                     'time_stamp':datetime.datetime.now(),
                     'gate':data['gate'],
                     'inout':data['inout']
-                   }
+                }
     prog = TeamModel(name=server_data['groupName'],
-                     time_stamp=server_data['time_stamp'],
-                     gate=server_data['gate'],
-                     inout=server_data['inout']) # data = {groupName:gpName, gate:'', inout:'in'};
+                    time_stamp=server_data['time_stamp'],
+                    gate=server_data['gate'],
+                    inout=server_data['inout']) # data = {groupName:gpName, gate:'', inout:'in'};
     prog.save_to_db()
 
     server_data['time_stamp'] = datetime.datetime.strftime(server_data['time_stamp'],'%c')
     socketio.emit('reply', server_data)
+    ret = prog.find_interval()
+    if ret:
+        emit('status', {'data':ret}, broadcast=True)
+
 
 @socketio.on('show status')
 def show_status(data):
