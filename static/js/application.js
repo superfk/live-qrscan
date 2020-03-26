@@ -80,7 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
   socket.on('connect', function() {
     socket.emit('my event', {data: 'connected!'});
     init();
-    // let queryStatus = setInterval(getStatus,5000)
+    getStatus()
+    let queryStatus = setInterval(getStatus,30000)
   })
   
   socket.on('reply', function(data) {
