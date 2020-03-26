@@ -19,12 +19,11 @@ app.secret_key = 'shawn'
 
 db = SQLAlchemy(app)
 db.init_app(app)
-db.create_all()
 socketio  = SocketIO(app, manage_session=True)
 
-# @app.before_first_request
-# def create_tables():
-#     db.create_all()
+@app.before_first_request
+def create_tables():
+    db.create_all()
 
 @app.route('/')
 def hello():
