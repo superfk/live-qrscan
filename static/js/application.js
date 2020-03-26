@@ -107,7 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
   backBtn.addEventListener('click', ()=>{
     let curV = getCurrentView();
     let lastV = showLastView();
-    console.log(curV.id)
     let isTop = lastV.id === 'home-page';
     if (isTop){
       $(backBtn).hide();
@@ -191,15 +190,14 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   switchCamBtn.addEventListener('click', (event)=>{
-    console.log(camDirection)
     if (typeof currentStream !== 'undefined') {
       stopMediaTracks(currentStream);
     }
     const videoConstraints = {};
     if (camDirection) {
-      videoConstraints.facingMode = 'user';
-    } else {
       videoConstraints.facingMode = 'environment';
+    } else {
+      videoConstraints.facingMode = 'user';
     }
     const constraints = {
       video: videoConstraints,
@@ -210,7 +208,6 @@ document.addEventListener('DOMContentLoaded', () => {
       .getUserMedia(constraints)
       .then(stream => {
         let video = document.querySelector('#scanner video');
-        console.log(video)
         currentStream = stream;
         video.srcObject = stream;
         return navigator.mediaDevices.enumerateDevices();
@@ -350,7 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function initJsQRScanner(){
     //create a new scanner passing to it a callback function that will be invoked when
     //the scanner succesfully scan a QR code
-    jbScanner = new JsQRScanner(onQRCodeScanned, provideVideoQQ);
+    jbScanner = new JsQRScanner(onQRCodeScanned, provideVideo);
     //reduce the size of analyzed images to increase performance on mobile devices
     jbScanner.setSnapImageMaxSize(3000);
     jbScanner.setScanInterval(250);

@@ -160,7 +160,6 @@ html, body{
 }
 
 .qrscanner > div > video{
-  max-width: 60% !important;
 	max-height: 40% !important;
 }
 
