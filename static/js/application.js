@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
   socket.on('connect', function() {
     socket.emit('my event', {data: 'connected!'});
     init();
-    let queryStatus = setInterval(getStatus,5000)
+    // let queryStatus = setInterval(getStatus,5000)
   })
   
   socket.on('reply', function(data) {
@@ -197,9 +197,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const videoConstraints = {};
     if (camDirection) {
-      videoConstraints.facingMode = 'environment';
-    } else {
       videoConstraints.facingMode = 'user';
+    } else {
+      videoConstraints.facingMode = 'environment';
     }
     const constraints = {
       video: videoConstraints,
