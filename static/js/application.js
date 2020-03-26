@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         title: {
             display: true,
-            text: '即時資訊'
+            text: '即時闖關時間統計(秒)'
         }
     }
   });
@@ -365,8 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // plot function
   function updateLiveStatus(chart, data) {
-    console.log(data)
-
+    
     // get team names
     let label = data.map((element)=>{
       return element.groupName;
@@ -376,8 +375,6 @@ document.addEventListener('DOMContentLoaded', () => {
       let inv = element.intv ===''?0:parseFloat(element.intv);
       return inv;
     })
-    console.log(label)
-    console.log(interv)
 
     chart.data.labels = label;
     chart.data.datasets = [{

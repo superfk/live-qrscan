@@ -54,7 +54,7 @@ class TeamModel(db.Model):
         print(all_gates)
         all_status = []
         for t in all_teams:
-            server_data = { 'groupName':t, 'intv':0}
+            server_data = {'intv':0, 'groupName':t}
             total_intv = 0.0
             for g in all_gates:
                 start = cls.find_checkin(t, g)
@@ -67,7 +67,8 @@ class TeamModel(db.Model):
             server_data['intv'] = total_intv
             all_status.append(server_data)
         if len(all_status) > 0:
-            return all_status
+            sortIntvList = sorted(all_status, key=lambda k: k['intv'])
+            return sortIntvList
 
     def save_to_db(self):
         db.session.add(self)
