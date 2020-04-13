@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let viewHistory = [];
   let whichGate = {groupName:gpName, gate:'', inout:'in'};
   let jsqrInited = false;
+  let showAlert = null;
 
   // socket
   let socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port, {transports: ['websocket']});
@@ -272,6 +273,9 @@ document.addEventListener('DOMContentLoaded', () => {
     return currentView;
   }
 
+  function showQRText(){
+    $("#scan-page .qrscan_text_info").hide();
+  }
 
   // JsQRScanner function
   function onQRCodeScanned(scannedText)
@@ -280,24 +284,39 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(scannedText)
         if(scannedText)
         {
-          let decodedObj = JSON.parse(scannedText);
-          decodedObj.groupName = gpName;
-          // scannedTextMemo.innerText = scannedText;
-          scannedTextMemo.innerHTML = `<i class="fas fa-check"></i>掃描完成
-                                        <div>隊名:${decodedObj.groupName}</div>
-                                        <div>關號:${decodedObj.gate}</div>
-                                        <div>類別:${decodedObj.inout}</div>`;            
+          try{
+            let decodedObj = JSON.parse(scannedText);
+            decodedObj.groupName = gpName;
+            // scannedTextMemo.innerText = scannedText;
+            scannedTextMemo.innerHTML = `<i class="fas fa-check"></i>掃描完成
+                                          <div>隊名:${decodedObj.groupName}</div>
+                                          <div>關號:${decodedObj.gate}</div>
+                                          <div>類別:${decodedObj.inout}</div>`;            
+            
+            $("#scannedTextMemo").removeClass("qrOK qrNG").addClass("qrOK");
+            $("#scan-page .qrscan_text_info").show();
+            clearTimeout(showAlert);
+            showAlert = setTimeout(showQRText,2000);
 
-          $("#scan-page .qrscan_text_info").show();
-          let showAlert = setTimeout(()=>{
-            $("#scan-page .qrscan_text_info").hide();
-          },2000);
+            // save data to server
 
-          // save data to server
+            socket.emit('check in', decodedObj);
+            
+            console.log(JSON.stringify(decodedObj));
 
-          socket.emit('check in', decodedObj);
+          }catch{
+            console.log('Not Recognize this QRCODE');
+
+            // scannedTextMemo.innerText = scannedText;
+            scannedTextMemo.innerHTML = `<i class="fas fa-times"></i>掃描失敗
+                                          <div>無法識別</div>`;  
+
+            $("#scannedTextMemo").removeClass("qrOK qrNG").addClass("qrNG");
+            $("#scan-page .qrscan_text_info").show();
+            clearTimeout(showAlert);
+            showAlert = setTimeout(showQRText,2000);
+          }
           
-          console.log(JSON.stringify(decodedObj));
 
         }
       }
