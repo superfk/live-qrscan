@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         title: {
             display: true,
-            text: '即時闖關時間統計(秒)'
+            text: '闖關時間統計(秒) [綠色代表已完成闖關]'
         }
     }
   });
@@ -384,9 +384,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // plot function
   function updateLiveStatus(chart, data) {
+    console.log(data)
     
     // get team names
-    let label = data.map((element)=>{
+    let teams = data.map((element)=>{
       return element.groupName;
     })
     // get interval
@@ -400,13 +401,22 @@ document.addEventListener('DOMContentLoaded', () => {
       return element.done?'#16a085':'#c0392b';
     })
 
-    chart.data.labels = label;
-    chart.data.datasets = [{
-      label: '',
-      backgroundColor: barColor,
-      borderColor: '#2c3e50',
-      data: interv
-  }];
+    // get gate indivisual time
+    let gateStatusOfTeams = data[0].gate_status.map((elm,idx)=>{
+      let teamIntv = data.map((e)=>{
+        return e.getStatus[idx].intv
+      })
+
+      return {
+        label: elm.gate,
+        backgroundColor: barColor,
+        borderColor: '#2c3e50',
+        data: teamIntv
+      }
+    })
+    console.log(gateStatusOfTeams)
+    chart.data.labels = teams;
+    chart.data.datasets = gateStatusOfTeams;
     chart.update();
   }
 

@@ -57,10 +57,12 @@ class TeamModel(db.Model):
         all_status = []
         mx_gate = int(MAX_GATE)
         for t in all_teams:
-            server_data = {'intv':0, 'groupName':t, 'for_sorting':999999999999.9999, 'done':False}
+            server_data = {'intv':0, 'groupName':t, 'for_sorting':999999999999.9999, 'done':False, 'gate_status':None}
             total_intv = 0.0
             gate_counter = 0
+            gate_status=[]
             for g in all_gates:
+                gate_data = {'gate':g, 'intv':0}
                 start = cls.find_checkin(t, g)
                 end = cls.find_checkout(t, g)
                 if start and end:
@@ -68,9 +70,12 @@ class TeamModel(db.Model):
                     # endT = datetime.datetime.strptime(end,"%Y-%m-%d %H:%M:%D.%f")
                     difference = end - start
                     intv = difference.total_seconds()
-                    intv = intv if intv >= 0 else 0.0 
+                    intv = intv if intv >= 0 else 0.0
+                    gate_data['intv'] = intv
                     total_intv += intv
                     gate_counter += 1
+                gate_status.append(gate_data)
+            server_data['gate_status'] = gate_status
             if total_intv > 0.0:
                 server_data['intv'] = total_intv
                 server_data['for_sorting'] = total_intv
