@@ -384,7 +384,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // plot function
   function updateLiveStatus(chart, data) {
-    console.log(data)
     
     // get team names
     let teams = data.map((element)=>{
@@ -401,22 +400,13 @@ document.addEventListener('DOMContentLoaded', () => {
       return element.done?'#16a085':'#c0392b';
     })
 
-    // get gate indivisual time
-    let gateStatusOfTeams = data[0].gate_status.map((elm,idx)=>{
-      let teamIntv = data.map((e)=>{
-        return e.getStatus[idx].intv
-      })
-
-      return {
-        label: elm.gate,
-        backgroundColor: barColor,
-        borderColor: '#2c3e50',
-        data: teamIntv
-      }
-    })
-    console.log(gateStatusOfTeams)
     chart.data.labels = teams;
-    chart.data.datasets = gateStatusOfTeams;
+    chart.data.datasets = [{
+      label: '',
+      backgroundColor: barColor,
+      borderColor: '#2c3e50',
+      data: interv
+  }];
     chart.update();
   }
 
