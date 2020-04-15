@@ -101,6 +101,7 @@ html, body{
 .view {
   display: none;
   transition: linear;
+  width: 100%;
 }
 
 .view-shown {

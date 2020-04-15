@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  var color = Chart.helpers.color;
+  var COLORS = ['#f1c40f','#e67e22','#e74c3c','#8e44ad', '#2c3e50', '#3498db', '#fdcb6e', '#ff7675', '#81ecec', '#b2bec3']
 
   let currentStream;
   let camDirection = true; // true is rear cam
@@ -400,13 +400,21 @@ document.addEventListener('DOMContentLoaded', () => {
       return element.done?'#16a085':'#c0392b';
     })
 
+    // wrap gate time data amoung teams
+    let gateTimes = data[0].gate_status.map((elm,index)=>{
+      let gateTimeOfTeams = data.map((e,i)=>{
+        return e.gate_status[index].intv;
+      })
+      return {
+        label: elm.gate,
+        backgroundColor: COLORS[index%COLORS.length],
+        borderColor: '#2c3e50',
+        data: gateTimeOfTeams
+    };
+    })
+
     chart.data.labels = teams;
-    chart.data.datasets = [{
-      label: '',
-      backgroundColor: barColor,
-      borderColor: '#2c3e50',
-      data: interv
-  }];
+    chart.data.datasets = gateTimes;
     chart.update();
   }
 
