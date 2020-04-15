@@ -61,7 +61,7 @@ class TeamModel(db.Model):
             total_intv = 0.0
             gate_counter = 0
             gate_status=[]
-            for g in all_gates:
+            for g in range(1,mx_gate+1):
                 gate_data = {'gate':g, 'intv':0}
                 start = cls.find_checkin(t, g)
                 end = cls.find_checkout(t, g)
