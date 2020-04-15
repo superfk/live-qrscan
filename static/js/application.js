@@ -60,7 +60,19 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         title: {
             display: true,
-            text: '闖關時間統計(秒) [綠色代表已完成闖關]'
+            text: '闖關時間統計(秒)'
+        },
+        tooltips:{
+          mode: 'index',
+          intersect: false
+        },
+        scale:{
+          xAxes: [{
+            stacked: true,
+          }],
+          yAxes: [{
+            stacked: true
+          }]
         }
     }
   });
