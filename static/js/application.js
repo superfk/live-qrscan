@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
           mode: 'index',
           intersect: false
         },
-        scale:{
+        scales:{
           xAxes: [{
             stacked: true,
           }],
