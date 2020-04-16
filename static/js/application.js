@@ -362,12 +362,6 @@ document.addEventListener('DOMContentLoaded', () => {
           },
           audio: false
         })
-        .then(stream => {
-          let video = document.querySelector('#scanner video');
-          currentStream = stream;
-          video.srcObject = stream;
-          return navigator.mediaDevices.enumerateDevices();
-        });
       } 
       
       return Promise.reject('Your browser does not support getUserMedia');
