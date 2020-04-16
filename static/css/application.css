@@ -174,11 +174,6 @@ html, body{
   overflow: hidden;
 }
 
-video {
-  max-width: 50% !important;
-  max-height: 40% !important;
-}
-
 .qrscanner > div > video{
   max-width: 50% !important;
   max-height: 40% !important;
