@@ -470,7 +470,7 @@ const updateRecods = data =>{
   let tableContent = ''
   let myTable = document.getElementById('recordsTable')
 
-  data.forEach((elm,index)=>{
+  data.data.forEach((elm,index)=>{
     tableContent += `
     <tr>
       <th scope="row">${index}</th>
