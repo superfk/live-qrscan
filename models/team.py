@@ -87,6 +87,8 @@ class TeamModel(db.Model):
         if len(all_status) > 0:
             sortIntvList = sorted(all_status, key=lambda k: k['for_sorting'] )
             return sortIntvList
+        else:
+            return all_status
 
     def save_to_db(self):
         db.session.add(self)

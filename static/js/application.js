@@ -413,17 +413,21 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     // wrap gate time data amoung teams
-    let gateTimes = data[0].gate_status.map((elm,index)=>{
-      let gateTimeOfTeams = data.map((e,i)=>{
-        return e.gate_status[index].intv;
+    let gateTimes = [];
+    if (data){
+      gateTimes = data[0].gate_status.map((elm,index)=>{
+        let gateTimeOfTeams = data.map((e,i)=>{
+          return e.gate_status[index].intv;
+        })
+        return {
+          label: elm.gate,
+          backgroundColor: COLORS[index%COLORS.length],
+          borderColor: '#2c3e50',
+          data: gateTimeOfTeams
+        };
       })
-      return {
-        label: elm.gate,
-        backgroundColor: COLORS[index%COLORS.length],
-        borderColor: '#2c3e50',
-        data: gateTimeOfTeams
-    };
-    })
+    }
+    
 
     chart.data.labels = teams;
     chart.data.datasets = gateTimes;

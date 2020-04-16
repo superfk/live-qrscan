@@ -145,6 +145,8 @@ html, body{
   align-items: center;
   justify-content: center;
   position: relative;
+  width: 100%;
+  overflow: hidden;
 }
 
 .qrscanner {
@@ -167,7 +169,7 @@ html, body{
 }
 
 .qrscanner > div > video{
-  max-width: 50% !important;
+  max-width: 90% !important;
 	max-height: 40% !important;
 }
 
