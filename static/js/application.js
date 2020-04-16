@@ -204,16 +204,24 @@ document.addEventListener('DOMContentLoaded', () => {
     qrcode.makeCode(JSON.stringify(whichGate));
   })
 
-  closeCamScanToogle.addEventListener('change', ()=>{
-    let isOpen = $(this).is(':checked');
+  closeCamScanToogle.addEventListener('change', (e)=>{
+    let isOpen = $(e.target).prop('checked');
+    let vid = document.querySelector('#scanner video');
+    let stream = vid.srcObject;
+    let tracks = stream.getTracks();
+    console.log(vid)
     console.log(isOpen)
-    // if (typeof currentStream !== 'undefined' && isOpen) {
-    //   jbScanner.stopScanning();
-    //   stopMediaTracks(currentStream);
-    // }else{
-    //   // jbScanner.resumeScanning();
-    //   initJsQRScanner();
-    // }
+    console.log(typeof stream)
+    console.log(tracks)
+    if (isOpen) {
+      provideVideo();
+      jbScanner.resumeScanning();
+      console.log('resume cam')
+    }else{
+      stopMediaTracks(stream);
+      console.log('close cam')
+      // initJsQRScanner();
+    }
   })
 
   stopScanBtn.addEventListener('click', ()=>{
@@ -350,7 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-  function provideVideo()
+  function provideVideo11()
   {
       var n = navigator;
 
@@ -365,6 +373,35 @@ document.addEventListener('DOMContentLoaded', () => {
       } 
       
       return Promise.reject('Your browser does not support getUserMedia');
+  }
+
+  function provideVideo()
+  {
+      const videoConstraints = {};
+      if (camDirection) {
+        videoConstraints.facingMode = 'environment';
+      } else {
+        videoConstraints.facingMode = 'user';
+      }
+      const constraints = {
+        video: videoConstraints,
+        audio: false
+      };
+
+      navigator.mediaDevices
+        .getUserMedia(constraints)
+        .then(stream => {
+          let video = document.querySelector('#scanner video');
+          currentStream = stream;
+          video.srcObject = stream;
+          return navigator.mediaDevices.enumerateDevices();
+        })
+        .then(gotDevices=>{
+          camDirection = !camDirection;
+        })
+        .catch(error => {
+          console.error(error);
+        });
   }
 
   //funtion returning a promise with a video stream
