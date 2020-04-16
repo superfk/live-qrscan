@@ -98,9 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
     init();
     getStatus()
     let queryStatus = setInterval(getStatus,30000)
-    let queryRecords = setInterval(()=>{
-      socket.emit('show records');
-    },5000)
   })
   
   socket.on('reply', function(data) {
