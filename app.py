@@ -77,11 +77,11 @@ def show_status(data):
 def show_records(data):
     prog = TeamModel(name=data['group'],
                     time_stamp='',
-                    gate=data['gate'],
+                    gate=int(data['gate']),
                     inout='') # data = {groupName:gpName, gate:'', inout:'in'};
     ret = prog.find_records(name=data['group'], gate=data['gate'])
     if ret:
-        emit('allRecords', {'data':ret})
+        emit('allRecords', {'data':ret}, broadcast=True)
 
 if __name__=="__main__":
     app.run(debug=True)
