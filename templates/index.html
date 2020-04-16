@@ -3,24 +3,15 @@
   <head>
     <title>古亭兒主闖關App</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
-    <link href="static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <!-- <link href="static/css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
     <!-- Bootstrap core CSS -->
-    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
-    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/css/mdb.min.css" rel="stylesheet"> -->
-
-    <!-- JQuery -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script> -->
-    <!-- MDB core JavaScript -->
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/js/mdb.min.js"></script> -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/css/mdb.min.css" rel="stylesheet">
 
     <link href="static/css/application.css" rel="stylesheet" media="screen">
     <!-- <link rel="stylesheet" href="static/fontawesome/css/all.css"> -->
@@ -48,8 +39,8 @@
         <!-- home page -->
         <div id="home-page" class='my-sub-view'>
           <h4 class="text-center">請選擇身分</h4>
-          <button id='iamOwner' type="button" class="btn btn-primary btn-lg btn-disp-block">我是關主</button>
-          <button id='iamMember' type="button" class="btn btn-primary btn-lg btn-disp-block">我是組員</button>
+          <button id='iamOwner' type="button" class="btn btn-primary btn-large btn-disp-block">我是關主</button>
+          <button id='iamMember' type="button" class="btn btn-primary btn-large btn-disp-block">我是組員</button>
         </div>
 
         <!-- member gate select page -->
@@ -62,7 +53,7 @@
               <input type="text" id="groupName" name='group_name' class="form-control">
               <div class="alert alert-danger" role="alert" style='display: none;'>請輸入隊名</div>
               <br>
-              <button type="submit" class="btn btn-primary btn-lg btn-block">確認</button>
+              <button type="submit" class="btn btn-primary btn-large btn-block">確認</button>
             </div>
           </form>    
         </div>
@@ -79,8 +70,8 @@
               <label class="custom-control-label" for="closeCamScan">相機開關</label>
             </div>
           </div>
-          <!-- <button id='closeCamScan' type="button" class="btn btn-primary btn-lg btn-block m-1">關閉相機</button> -->
-          <button id='stopScan' type="button" class="btn btn-primary btn-lg btn-block m-1" style="display: none;">停止掃描</button>
+          <!-- <button id='closeCamScan' type="button" class="btn btn-primary btn-large btn-block m-1">關閉相機</button> -->
+          <button id='stopScan' type="button" class="btn btn-primary btn-large btn-block m-1" style="display: none;">停止掃描</button>
           <br>
           <div class='live-qr-container'>
             <div id="scanner" class="qrscanner"></div>
@@ -113,7 +104,7 @@
                 <option>10</option>
               </select>
               <br>
-              <button type="submit" class="btn btn-primary btn-lg btn-block">下一步</button>
+              <button type="submit" class="btn btn-primary btn-large btn-block">下一步</button>
             </div>
           </form>
         </div>
@@ -121,8 +112,8 @@
         <!-- in out page -->
         <div id='inout-page' class='my-sub-view'>
           <h4 class="text-center">顯示QRCODE</h4>       
-          <button id='showInQr' type="button" class="btn btn-primary btn-lg btn-block m-1">IN</button>
-          <button id='showOutQr' type="button" class="btn btn-primary btn-lg btn-block m-1">OUT</button>
+          <button id='showInQr' type="button" class="btn btn-primary btn-large btn-block m-1">IN</button>
+          <button id='showOutQr' type="button" class="btn btn-primary btn-large btn-block m-1">OUT</button>
         </div>
 
         <!-- QR code page -->
@@ -152,9 +143,17 @@
     <!-- SocketIO JS -->
     <!-- <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script> -->
     <script type="text/javascript" src="{{ url_for('static', filename='js/socket.io.js') }}"></script>
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/js/mdb.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.0.3.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.0.3.min.js') }}"></script> -->
+    <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script> -->
     <script type="text/javascript" src="{{ url_for('static', filename='js/qrcode.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/JsQRScanner/jsqrscanner.nocache.js')}}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/application.js') }}"></script>

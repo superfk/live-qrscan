@@ -207,12 +207,12 @@ document.addEventListener('DOMContentLoaded', () => {
   closeCamScanToogle.addEventListener('change', ()=>{
     let isOpen = $(this).is(':checked');
     console.log(isOpen)
-    if (typeof currentStream !== 'undefined' || isOpen) {
+    if (typeof currentStream !== 'undefined' && isOpen) {
       jbScanner.stopScanning();
       stopMediaTracks(currentStream);
     }else{
       // jbScanner.resumeScanning();
-      provideVideo();
+      initJsQRScanner();
     }
   })
 
