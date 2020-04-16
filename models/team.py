@@ -59,7 +59,7 @@ class TeamModel(db.Model):
         else:
             all_data = cls.query.all()
         if all_data:
-            return [r for r, in all_data]
+            return [r.__dict__ for r in all_data]
 
     @classmethod
     def find_interval(cls):
