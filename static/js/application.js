@@ -467,4 +467,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const updateRecods = data =>{
 
+  let tableContent = ''
+  let myTable = document.getElementById('recordsTable')
+
+  data.forEach((elm,index)=>{
+    tableContent += `
+    <tr>
+      <th scope="row">${index}</th>
+      <td>${elm.name}</td>
+      <td>${elm.gate}</td>
+      <td>${elm.inout}</td>
+      <td>${elm.time_stamp}</td>
+    </tr>
+    `
+  })
+
+  myTable.innerHTML = tableContent;
+  
 }
