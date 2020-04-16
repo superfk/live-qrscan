@@ -150,7 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let inputGpName = checkRecordForm.elements.namedItem("searchTeamName").value;
     let inputGateNumber = checkRecordForm.elements.namedItem("searchGate").value;
     socket.emit('show records',{ group: inputGpName, gate: inputGateNumber });
-    console.log({ group: inputGpName, gate: inputGateNumber });
   })
 
   groupInputForm.addEventListener('submit',(e)=>{

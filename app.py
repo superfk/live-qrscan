@@ -80,6 +80,7 @@ def show_records(data):
                     gate=int(data['gate']),
                     inout='') # data = {groupName:gpName, gate:'', inout:'in'};
     ret = prog.find_records(name=data['group'], gate=data['gate'])
+    print(ret)
     if ret:
         emit('allRecords', {'data':ret}, broadcast=True)
 

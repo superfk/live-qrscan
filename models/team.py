@@ -51,6 +51,7 @@ class TeamModel(db.Model):
     @classmethod
     def find_records(cls, name=None, gate=None):
         all_data = cls.query.all()
+        print(all_data)
         return [r.__dict__ for r in all_data]
 
     @classmethod
