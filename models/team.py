@@ -6,9 +6,12 @@ import time, os
 MAX_GATE = os.environ.get('MAX_GATE',7)
 
 def formatTime(dict_data):
-    strDate = dict_data.time_stamp.strftime("%c")
-    dict_data.time_stamp = strDate
-    return dict_data
+    newdict = {}
+    newdict['name'] = dict_data.name
+    newdict['time_stamp'] = dict_data.time_stamp.strftime("%c")
+    newdict['gate'] = dict_data.gate
+    newdict['inout'] = dict_data.inout
+    return newdict
 
 class TeamModel(db.Model):
     __tablename__ = 'progress'
