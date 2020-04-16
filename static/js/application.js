@@ -207,13 +207,13 @@ document.addEventListener('DOMContentLoaded', () => {
   closeCamScanToogle.addEventListener('change', ()=>{
     let isOpen = $(this).is(':checked');
     console.log(isOpen)
-    if (typeof currentStream !== 'undefined' && isOpen) {
-      jbScanner.stopScanning();
-      stopMediaTracks(currentStream);
-    }else{
-      // jbScanner.resumeScanning();
-      initJsQRScanner();
-    }
+    // if (typeof currentStream !== 'undefined' && isOpen) {
+    //   jbScanner.stopScanning();
+    //   stopMediaTracks(currentStream);
+    // }else{
+    //   // jbScanner.resumeScanning();
+    //   initJsQRScanner();
+    // }
   })
 
   stopScanBtn.addEventListener('click', ()=>{
@@ -255,7 +255,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function stopMediaTracks(stream) {
     stream.getTracks().forEach(track => {
       track.stop();
-      currentStream = undefined;
     });
   }
 
