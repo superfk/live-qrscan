@@ -57,8 +57,10 @@ class TeamModel(db.Model):
 
     @classmethod
     def find_records(cls, name=None, gate=None):
-        name = None if name == ''
-        gate = None if gate == ''
+        if name == '':
+            name = None
+        if gate == '':
+            fate = None
         if name and gate:
             all_data = cls.query.filter_by(name=name,gate=gate).all()
         elif name:
@@ -67,7 +69,7 @@ class TeamModel(db.Model):
             all_data = cls.query.filter_by(gate=gate).all()
         else:
             all_data = cls.query.all()
-        
+         
         return [formatTime(r) for r in all_data]
 
     @classmethod
