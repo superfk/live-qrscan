@@ -75,9 +75,9 @@ def show_status(data):
 
 @socketio.on('show records')
 def show_records(group=None, gate=None):
-    prog = TeamModel(name='',
+    prog = TeamModel(name=group,
                     time_stamp='',
-                    gate=1,
+                    gate=gate,
                     inout='') # data = {groupName:gpName, gate:'', inout:'in'};
     ret = prog.find_records(name=group, gate=gate)
     if ret:

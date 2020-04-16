@@ -111,7 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
   socket.on('status', function(data) {
     console.log(data);
     updateLiveStatus(liveStatusChart, data.data)
-  
   })
 
   socket.on('all_records', function(data) {

@@ -51,11 +51,11 @@ class TeamModel(db.Model):
     @classmethod
     def find_records(cls, name=None, gate=None):
         if name and gate:
-            all_data = cls.query.filter_by(name=name,gate=gate).all()
+            all_data = cls.query.filter_by(name=name,gate=int(gate)).all()
         elif name and not gate:
             all_data = cls.query.filter_by(name=name).all()
         elif not name and gate:
-            all_data = cls.query.filter_by(gate=gate).all()
+            all_data = cls.query.filter_by(gate=int(gate)).all()
         else:
             all_data = cls.query.all()
         if all_data:
