@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateLiveStatus(liveStatusChart, data.data)
   })
 
-  socket.on('all_records', function(data) {
+  socket.on('allRecords', function(data) {
     console.log(data);
     updateRecods(data);
   })
@@ -152,7 +152,8 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     let inputGpName = checkRecordForm.elements.namedItem("searchTeamName").value;
     let inputGateNumber = checkRecordForm.elements.namedItem("searchGate").value;
-    socket.emit('show records',JSON.stringify({ group: inputGpName, gate: inputGateNumber }));
+    socket.emit('show records',{ group: inputGpName, gate: inputGateNumber });
+    console.log({ group: inputGpName, gate: inputGateNumber });
   })
 
   groupInputForm.addEventListener('submit',(e)=>{

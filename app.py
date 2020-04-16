@@ -81,7 +81,7 @@ def show_records(data):
                     inout='') # data = {groupName:gpName, gate:'', inout:'in'};
     ret = prog.find_records(name=data['group'], gate=data['gate'])
     if ret:
-        emit('all_records', {'data':ret})
+        emit('allRecords', {'data':ret})
 
 if __name__=="__main__":
     app.run(debug=True)
