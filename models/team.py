@@ -5,6 +5,10 @@ import time, os
 
 MAX_GATE = os.environ.get('MAX_GATE',7)
 
+def formatTime(dict_data):
+    strDate = dict_data.time_stamp.strftime("%c")
+    dict_data.time_stamp = strDate
+    return dict_data
 
 class TeamModel(db.Model):
     __tablename__ = 'progress'
@@ -51,8 +55,7 @@ class TeamModel(db.Model):
     @classmethod
     def find_records(cls, name=None, gate=None):
         all_data = cls.query.all()
-        print(all_data)
-        return [r.__dict__ for r in all_data]
+        return [formatTime(r) for r in all_data]
 
     @classmethod
     def find_interval(cls):
