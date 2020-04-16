@@ -73,6 +73,16 @@ def show_status(data):
     if ret:
         emit('status', {'data':ret}, broadcast=True)
 
+@socketio.on('show records')
+def show_records(group=None, gate=None):
+    prog = TeamModel(name='',
+                    time_stamp='',
+                    gate=1,
+                    inout='') # data = {groupName:gpName, gate:'', inout:'in'};
+    ret = prog.find_records(name=group, gate=gate)
+    if ret:
+        emit('all_records', {'data':ret})
+
 if __name__=="__main__":
     app.run(debug=True)
     # socketio.run(app,policy_server=False, transports='websocket, xhr-polling, xhr-multipart')

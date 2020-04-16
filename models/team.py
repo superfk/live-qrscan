@@ -49,6 +49,19 @@ class TeamModel(db.Model):
             return all_data[-1].time_stamp
 
     @classmethod
+    def find_records(cls, name=None, gate=None):
+        if name and gate:
+            all_data = cls.query.filter_by(name=name,gate=gate).all()
+        elif name and not gate:
+            all_data = cls.query.filter_by(name=name).all()
+        elif not name and gate:
+            all_data = cls.query.filter_by(gate=gate).all()
+        else:
+            all_data = cls.query.all()
+        if all_data:
+            return all_data
+
+    @classmethod
     def find_interval(cls):
         all_teams = cls.find_all_team()
         print(all_teams)

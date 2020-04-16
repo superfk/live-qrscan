@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let scannerParentElement = document.getElementById("scanner");
   let scannedTextMemo = document.getElementById("scannedTextMemo");
 
-  let startScanBtn = document.getElementById('startScan');
+  let closeCamScanToogle = document.getElementById('closeCamScan');
   let stopScanBtn = document.getElementById('stopScan');
 
   let inQrBtn = document.getElementById('showInQr');
@@ -95,6 +95,9 @@ document.addEventListener('DOMContentLoaded', () => {
     init();
     getStatus()
     let queryStatus = setInterval(getStatus,30000)
+    let queryRecords = setInterval(()=>{
+      socket.emit('show records');
+    },5000)
   })
   
   socket.on('reply', function(data) {
@@ -112,6 +115,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   })
 
+  socket.on('all_records', function(data) {
+    console.log(data);
+  })
 
   // listener
   showStatusBtn.addEventListener('click', ()=>{
@@ -125,6 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isTop){
       $(backBtn).hide();
     }else if (curV.id === 'scan-page'){
+      if (typeof currentStream !== 'undefined') {
+        stopMediaTracks(currentStream);
+      }
       jbScanner.removeFrom(scannerParentElement);
       scannerParentElement.innerHTML = '';
       jsqrInited = false;
@@ -181,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   inQrBtn.addEventListener('click', ()=>{
     showView(pageQR);
-    $(pageQR).find('h4').html('通關開始QRCODE');
+    $(pageQR).find('h4').html('第'+whichGate.gate+'關:通關開始QRCODE');
     whichGate.inout = 'in';
     whichGate.groupName = '__not_defined';
     qrcode.makeCode(JSON.stringify(whichGate));
@@ -189,14 +198,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   outQrBtn.addEventListener('click', ()=>{
     showView(pageQR);
-    $(pageQR).find('h4').html('通關結束QRCODE');
+    $(pageQR).find('h4').html('第'+whichGate.gate+'關:通關結束QRCODE');
     whichGate.inout = 'out';
     whichGate.groupName = '__not_defined';
     qrcode.makeCode(JSON.stringify(whichGate));
   })
 
-  startScanBtn.addEventListener('click', ()=>{
-    jbScanner.resumeScanning();
+  closeCamScanToogle.addEventListener('change', ()=>{
+    let isOpen = $(this).is(':checked');
+    console.log(isOpen)
+    if (typeof currentStream !== 'undefined' || isOpen) {
+      jbScanner.stopScanning();
+      stopMediaTracks(currentStream);
+    }else{
+      // jbScanner.resumeScanning();
+      provideVideo();
+    }
   })
 
   stopScanBtn.addEventListener('click', ()=>{
@@ -238,6 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function stopMediaTracks(stream) {
     stream.getTracks().forEach(track => {
       track.stop();
+      currentStream = undefined;
     });
   }
 
@@ -344,6 +362,12 @@ document.addEventListener('DOMContentLoaded', () => {
             facingMode: "environment"
           },
           audio: false
+        })
+        .then(stream => {
+          let video = document.querySelector('#scanner video');
+          currentStream = stream;
+          video.srcObject = stream;
+          return navigator.mediaDevices.enumerateDevices();
         });
       } 
       

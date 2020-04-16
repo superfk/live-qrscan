@@ -66,6 +66,11 @@ html, body{
   justify-content:center;
 }
 
+.btn-disp-block{
+  display: block;
+  width: 100%;
+}
+
 #back {
   width: 10rem;
 }
@@ -98,7 +103,7 @@ html, body{
 
 }
 
-.view {
+.my-sub-view {
   display: none;
   transition: linear;
   width: 100%;
@@ -132,7 +137,8 @@ html, body{
 }
 
 .show-qr-container img {
-  width: 100%;
+  width: 80%;
+  height: auto;
 
 }
 
@@ -169,7 +175,7 @@ html, body{
 }
 
 .qrscanner > div > video{
-  max-width: 90% !important;
+  max-width: 50% !important;
 	max-height: 40% !important;
 }
 
@@ -186,6 +192,7 @@ html, body{
   position: absolute;
   left: 0px;
   top: 0px;
+  z-index: 10;
 }
 
 .qrscan_text_info div{
