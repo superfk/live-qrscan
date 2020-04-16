@@ -10,14 +10,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let pageHome = document.getElementById('home-page');
   let pageGroup = document.getElementById('whichgroup-page');
+  let pageCheckRecord = document.getElementById('dev-check-record-page');
   let pageScan = document.getElementById('scan-page');
   let pageLogin = document.getElementById('login-page');
   let pageInOut = document.getElementById('inout-page');
   let pageQR = document.getElementById('qrcode-page')
   let pageLive  = document.getElementById('dashboard-page');
 
+  let iamDevBtn = document.getElementById('iamDev');
   let iamOwnerBtn = document.getElementById('iamOwner');
   let iamMemberBtn = document.getElementById('iamMember');
+  let checkRecordForm = document.getElementById('check_record_form');
   let groupInputForm = document.getElementById('group_name_input_form');
   let ownerLoginForm = document.getElementById('owner_login_form');
 
@@ -102,21 +105,18 @@ document.addEventListener('DOMContentLoaded', () => {
   
   socket.on('reply', function(data) {
     console.log(data)
-    // debug only
-    // debugMsg.innerText = JSON.stringify(data);
   
   })
   
   socket.on('status', function(data) {
     console.log(data);
     updateLiveStatus(liveStatusChart, data.data)
-    // debug only
-    // debugMsg.innerText = JSON.stringify(data);
   
   })
 
   socket.on('all_records', function(data) {
     console.log(data);
+    updateRecods(data);
   })
 
   // listener
@@ -131,13 +131,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isTop){
       $(backBtn).hide();
     }else if (curV.id === 'scan-page'){
-      if (typeof currentStream !== 'undefined') {
-        stopMediaTracks(currentStream);
-      }
-      jbScanner.removeFrom(scannerParentElement);
-      scannerParentElement.innerHTML = '';
-      jsqrInited = false;
+      stopMediaTracks();
     }
+  })
+
+  iamDevBtn.addEventListener('click',()=>{
+    showView(pageCheckRecord);
+    $(backBtn).show();
   })
 
   iamOwnerBtn.addEventListener('click',()=>{
@@ -148,6 +148,13 @@ document.addEventListener('DOMContentLoaded', () => {
   iamMemberBtn.addEventListener('click',()=>{
     showView(pageGroup);
     $(backBtn).show();
+  })
+
+  checkRecordForm.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    let inputGpName = checkRecordForm.elements.namedItem("searchTeamName").value;
+    let inputGateNumber = checkRecordForm.elements.namedItem("searchGate").value;
+    socket.emit('show records',inputGpName,inputGateNumber);
   })
 
   groupInputForm.addEventListener('submit',(e)=>{
@@ -206,19 +213,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   closeCamScanToogle.addEventListener('change', (e)=>{
     let isOpen = $(e.target).prop('checked');
-    let vid = document.querySelector('#scanner video');
-    let stream = vid.srcObject;
-    let tracks = stream.getTracks();
-    console.log(vid)
-    console.log(isOpen)
-    console.log(typeof stream)
-    console.log(tracks)
     if (isOpen) {
-      provideVideo();
-      jbScanner.resumeScanning();
+      initJsQRScanner();
       console.log('resume cam')
     }else{
-      stopMediaTracks(stream);
+      stopMediaTracks();
       console.log('close cam')
       // initJsQRScanner();
     }
@@ -230,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   switchCamBtn.addEventListener('click', (event)=>{
     if (typeof currentStream !== 'undefined') {
-      stopMediaTracks(currentStream);
+      stopMediaTracks();
     }
     const videoConstraints = {};
     if (camDirection) {
@@ -260,10 +259,20 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   // functions
-  function stopMediaTracks(stream) {
-    stream.getTracks().forEach(track => {
-      track.stop();
-    });
+  function stopMediaTracks() {
+    let vid = document.querySelector('#scanner video');
+    try{
+      let stream = vid.srcObject;
+      stream.getTracks().forEach(track => {
+        track.stop();
+      });
+      jbScanner.removeFrom(scannerParentElement);
+      scannerParentElement.innerHTML = '';
+      jsqrInited = false;
+    }catch{
+      console.log('close cam error')
+    }
+    
   }
 
   function getStatus(){
@@ -358,7 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-  function provideVideo11()
+  function provideVideo()
   {
       var n = navigator;
 
@@ -373,35 +382,6 @@ document.addEventListener('DOMContentLoaded', () => {
       } 
       
       return Promise.reject('Your browser does not support getUserMedia');
-  }
-
-  function provideVideo()
-  {
-      const videoConstraints = {};
-      if (camDirection) {
-        videoConstraints.facingMode = 'environment';
-      } else {
-        videoConstraints.facingMode = 'user';
-      }
-      const constraints = {
-        video: videoConstraints,
-        audio: false
-      };
-
-      navigator.mediaDevices
-        .getUserMedia(constraints)
-        .then(stream => {
-          let video = document.querySelector('#scanner video');
-          currentStream = stream;
-          video.srcObject = stream;
-          return navigator.mediaDevices.enumerateDevices();
-        })
-        .then(gotDevices=>{
-          camDirection = !camDirection;
-        })
-        .catch(error => {
-          console.error(error);
-        });
   }
 
   //funtion returning a promise with a video stream
@@ -489,3 +469,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
+
+const updateRecods = data =>{
+
+}

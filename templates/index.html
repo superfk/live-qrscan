@@ -39,8 +39,44 @@
         <!-- home page -->
         <div id="home-page" class='my-sub-view'>
           <h4 class="text-center">請選擇身分</h4>
+          <button id='iamDev' type="button" class="btn btn-primary btn-large btn-disp-block">我是阿溫</button>
           <button id='iamOwner' type="button" class="btn btn-primary btn-large btn-disp-block">我是關主</button>
           <button id='iamMember' type="button" class="btn btn-primary btn-large btn-disp-block">我是組員</button>
+        </div>
+
+        <!-- Dev check Record page -->
+        <div id='dev-check-record-page' class='my-sub-view'>
+          <form class="text-center" id='check_record_form'>
+            <div class="form-row mb-4">
+              <div class="col">
+                  <!-- First name -->
+                  <input type="text" id="searchTeamName" name='searchTeamName' class="form-control" placeholder="隊名">
+              </div>
+              <div class="col">
+                  <!-- Last name -->
+                  <input type="number" id="searchGate" name='searchGate' class="form-control" placeholder="第幾關">
+              </div>
+            </div>
+            <button class="btn btn-info my-4 btn-block" type="submit">查詢</button>
+          </form>
+          
+          <div class="table-responsive">
+
+            <table class="table table-bordered table-striped w-auto">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">隊名</th>
+                  <th scope="col">關卡</th>
+                  <th scope="col">In/Out</th>
+                  <th scope="col">時間</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          
+          </div>
         </div>
 
         <!-- member gate select page -->
