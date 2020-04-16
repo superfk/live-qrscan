@@ -177,7 +177,7 @@ html, body{
 .qrscanner > div > video{
   max-width: 50% !important;
   max-height: 40% !important;
-  object-fit: contain;
+  object-fit: none;
 }
 
 .qrscan_text_info {
