@@ -60,7 +60,7 @@ class TeamModel(db.Model):
         if name == '':
             name = None
         if gate == '':
-            fate = None
+            gate = None
         if name and gate:
             all_data = cls.query.filter_by(name=name,gate=gate).all()
         elif name:
