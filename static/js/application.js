@@ -76,6 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
           yAxes: [{
             stacked: true
           }]
+        },
+        animation: {
+          duration: 0.2
         }
     }
   });
@@ -97,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.emit('my event', {data: 'connected!'});
     init();
     getStatus()
-    let queryStatus = setInterval(getStatus,30000)
+    // let queryStatus = setInterval(getStatus,30000)
   })
   
   socket.on('reply', function(data) {
@@ -117,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // listener
   showStatusBtn.addEventListener('click', ()=>{
     $(pageLive).toggleClass('view-shown');
+    getStatus();
   })
 
   backBtn.addEventListener('click', ()=>{
@@ -344,8 +348,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // save data to server
 
             socket.emit('check in', decodedObj);
-            
-            console.log(JSON.stringify(decodedObj));
 
           }catch{
             console.log('Not Recognize this QRCODE');
@@ -462,6 +464,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     chart.data.labels = teams;
     chart.data.datasets = gateTimes;
+    chart.options.animation={
+      duration:0
+    }
     chart.update();
   }
 

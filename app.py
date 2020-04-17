@@ -71,7 +71,7 @@ def show_status(data):
                     inout='') # data = {groupName:gpName, gate:'', inout:'in'};
     ret = prog.find_interval()
     if ret:
-        emit('status', {'data':ret}, broadcast=True)
+        emit('status', {'data':ret})
 
 @socketio.on('show records')
 def show_records(data):
@@ -81,7 +81,7 @@ def show_records(data):
                     inout='') # data = {groupName:gpName, gate:'', inout:'in'};
     ret = prog.find_records(name=data['group'], gate=data['gate'])
     if ret:
-        emit('allRecords', {'data':ret}, broadcast=True)
+        emit('allRecords', {'data':ret})
 
 if __name__=="__main__":
     app.run(debug=True)
