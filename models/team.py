@@ -8,7 +8,7 @@ MAX_GATE = os.environ.get('MAX_GATE',7)
 def formatTime(dict_data):
     newdict = {}
     newdict['name'] = dict_data.name
-    newdict['time_stamp'] = dict_data.time_stamp.strftime("%c")
+    newdict['time_stamp'] = dict_data.time_stamp.strftime("%H:%M:%D")
     newdict['gate'] = dict_data.gate
     newdict['inout'] = dict_data.inout
     return newdict
@@ -62,11 +62,11 @@ class TeamModel(db.Model):
         if gate == '':
             gate = None
         if name and gate:
-            all_data = cls.query.filter_by(name=name,gate=gate).all()
+            all_data = cls.query.filter_by(name=name,gate=int(gate)).all()
         elif name:
             all_data = cls.query.filter_by(name=name).all()
         elif gate:
-            all_data = cls.query.filter_by(gate=gate).all()
+            all_data = cls.query.filter_by(gate=int(gate)).all()
         else:
             all_data = cls.query.all()
          

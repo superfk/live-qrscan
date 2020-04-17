@@ -77,7 +77,7 @@ def show_status(data):
 def show_records(data):
     prog = TeamModel(name=data['group'],
                     time_stamp='',
-                    gate=int(data['gate']),
+                    gate=data['gate'],
                     inout='') # data = {groupName:gpName, gate:'', inout:'in'};
     ret = prog.find_records(name=data['group'], gate=data['gate'])
     print(ret)
