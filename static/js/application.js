@@ -39,8 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
   var debugMsg = document.getElementById("debugMsg");
 
   let curGroup = document.getElementById('curGroup');
-  let myTable = document.getElementById('recordsTable')
-
+  
   let ctx = document.getElementById('liveChart').getContext('2d');
   let chartData = {
     labels: [],
@@ -148,6 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   checkRecordForm.addEventListener('submit',(e)=>{
     e.preventDefault();
+    let myTable = document.getElementById('recordsTable')
+    myTable.innerHTML = ''
     let inputGpName = checkRecordForm.elements.namedItem("searchTeamName").value;
     let inputGateNumber = checkRecordForm.elements.namedItem("searchGate").value;
     socket.emit('show records',{ group: inputGpName, gate: inputGateNumber });
@@ -467,6 +468,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const updateRecods = data =>{
+
+  let myTable = document.getElementById('recordsTable');
 
   let tableContent = ''
 
