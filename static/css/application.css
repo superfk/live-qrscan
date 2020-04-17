@@ -107,6 +107,7 @@ html, body{
   display: none;
   transition: linear;
   width: 100%;
+  height: 100%;
 }
 
 .view-shown {
@@ -256,4 +257,5 @@ html, body{
   left: 0;
   bottom: 10px;
   width: 100%;
+  max-height: 250px;
 }

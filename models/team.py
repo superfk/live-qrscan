@@ -8,7 +8,7 @@ MAX_GATE = os.environ.get('MAX_GATE',7)
 def formatTime(dict_data):
     newdict = {}
     newdict['name'] = dict_data.name
-    newdict['time_stamp'] = dict_data.time_stamp.strftime("%H:%M:%D")
+    newdict['time_stamp'] = dict_data.time_stamp.strftime("%c")
     newdict['gate'] = dict_data.gate
     newdict['inout'] = dict_data.inout
     return newdict
@@ -75,9 +75,7 @@ class TeamModel(db.Model):
     @classmethod
     def find_interval(cls):
         all_teams = cls.find_all_team()
-        print(all_teams)
         all_gates = cls.find_all_gate()
-        print(all_gates)
         all_status = []
         mx_gate = int(MAX_GATE)
         for t in all_teams:

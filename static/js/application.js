@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
   var debugMsg = document.getElementById("debugMsg");
 
   let curGroup = document.getElementById('curGroup');
+  let myTable = document.getElementById('recordsTable')
 
   let ctx = document.getElementById('liveChart').getContext('2d');
   let chartData = {
@@ -150,6 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let inputGpName = checkRecordForm.elements.namedItem("searchTeamName").value;
     let inputGateNumber = checkRecordForm.elements.namedItem("searchGate").value;
     socket.emit('show records',{ group: inputGpName, gate: inputGateNumber });
+    myTable.innerHTML = '';
   })
 
   groupInputForm.addEventListener('submit',(e)=>{
@@ -214,7 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }else{
       stopMediaTracks();
       console.log('close cam')
-      // initJsQRScanner();
     }
   })
 
@@ -468,7 +469,6 @@ document.addEventListener('DOMContentLoaded', () => {
 const updateRecods = data =>{
 
   let tableContent = ''
-  let myTable = document.getElementById('recordsTable')
 
   data.data.forEach((elm,index)=>{
     tableContent += `
