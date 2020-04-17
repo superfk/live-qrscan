@@ -25,7 +25,7 @@ class TeamModel(db.Model):
     def __init__(self, name, time_stamp, gate, inout):
         self.name = name
         self.time_stamp = time_stamp
-        self.gate = int(gate)
+        self.gate = gate
         self.inout = inout
 
     def json(self):
