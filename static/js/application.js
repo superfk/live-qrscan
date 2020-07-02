@@ -286,6 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
   },1000)
 
   function init(){
+    $('.my-sub-view').removeClass('view-shown');
     $('#home-page').addClass('view-shown');
     $(backBtn).hide();
   }
@@ -450,7 +451,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (data){
       gateTimes = data[0].gate_status.map((elm,index)=>{
         let gateTimeOfTeams = data.map((e,i)=>{
-          return e.gate_status[index].intv;
+          return e.gate_status[index].intv.toFixed(2);
         })
         return {
           label: elm.gate,
