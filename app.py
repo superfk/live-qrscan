@@ -83,6 +83,16 @@ def show_records(data):
     if ret:
         emit('allRecords', {'data':ret})
 
+@socketio.on('delete all records')
+def delete_all_records():
+    prog = TeamModel(name=data['group'],
+                    time_stamp='',
+                    gate=data['gate'],
+                    inout='') # data = {groupName:gpName, gate:'', inout:'in'};
+    ret = prog.find_records(name=data['group'], gate=data['gate'])
+    if ret:
+        emit('allRecords', {'data':ret})
+
 if __name__=="__main__":
     app.run(debug=True)
     # socketio.run(app,policy_server=False, transports='websocket, xhr-polling, xhr-multipart')

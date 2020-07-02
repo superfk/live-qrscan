@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let pageInOut = document.getElementById('inout-page');
   let pageQR = document.getElementById('qrcode-page')
   let pageLive  = document.getElementById('dashboard-page');
+  let pageAdminLogin = document.getElementById('admin-login-page')
 
   let iamDevBtn = document.getElementById('iamDev');
   let iamOwnerBtn = document.getElementById('iamOwner');
@@ -23,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let checkRecordForm = document.getElementById('check_record_form');
   let groupInputForm = document.getElementById('group_name_input_form');
   let ownerLoginForm = document.getElementById('owner_login_form');
+  let adminLoginForm = document.getElementById('admin_login_form');
 
   let jbScanner;
   let switchCamBtn = document.getElementById("switchCam");
@@ -34,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let inQrBtn = document.getElementById('showInQr');
   let outQrBtn = document.getElementById('showOutQr');
+  let deleteAllBtn = document.getElementById('deleteAllRecord')
 
   var qrcode = new QRCode(document.getElementById("qrcode"))
   var debugMsg = document.getElementById("debugMsg");
@@ -135,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   iamDevBtn.addEventListener('click',()=>{
-    showView(pageCheckRecord);
+    showView(pageAdminLogin);
     $(backBtn).show();
   })
 
@@ -195,6 +198,24 @@ document.addEventListener('DOMContentLoaded', () => {
       },2000);
     }
 
+  })
+  adminLoginForm.addEventListener('submit',(e)=>{
+    let pw = adminLoginForm.elements.namedItem("password").value;
+    e.preventDefault();
+    // check password
+    if (pw === '1234'){
+      whichGate.gate = gate;
+      showView(pageCheckRecord);
+    }else{
+      $("#login-page .alert").show();
+      let showAlert = setTimeout(()=>{
+        $("#login-page .alert").hide();
+      },2000);
+    }
+  })
+
+  deleteAllBtn.addEventListener('click', ()=>{
+    socket.emit('delete all records');
   })
 
   inQrBtn.addEventListener('click', ()=>{
