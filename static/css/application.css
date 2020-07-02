@@ -159,6 +159,8 @@ html, body{
 .qrscanner {
   width: 100%;
   height: 40%;
+  max-height:60%;
+  overflow: hidden;
 }
 
 .qrscanner > div{
