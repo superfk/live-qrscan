@@ -159,7 +159,7 @@ html, body{
 .qrscanner {
   width: 100%;
   height: 40%;
-  max-height:60%;
+  max-height:70%;
   overflow: hidden;
 }
 
@@ -172,13 +172,13 @@ html, body{
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 40%;
+  height: 100%;
   overflow: hidden;
 }
 
 .qrscanner > div > video{
-  max-width: 50% !important;
-  max-height: 40% !important;
+  max-width: 100% !important;
+  max-height: 80% !important;
 }
 
 .qrscan_text_info {
