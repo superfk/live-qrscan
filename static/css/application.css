@@ -138,9 +138,9 @@ html, body{
 }
 
 .show-qr-container img {
-  width: 80%;
-  height: auto;
-
+  height: 50%;
+  max-width: 450px;
+  max-height: 450px;
 }
 
 .live-qr-container {
