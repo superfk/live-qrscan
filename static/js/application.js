@@ -204,7 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     // check password
     if (pw === '1234'){
-      whichGate.gate = gate;
       showView(pageCheckRecord);
     }else{
       $("#login-page .alert").show();
