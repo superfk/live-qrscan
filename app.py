@@ -91,7 +91,9 @@ def delete_all_records():
                     inout='') # data = {groupName:gpName, gate:'', inout:'in'};
     ret = prog.delete_from_db()
     if ret:
-        emit('allRecords', {'data':ret})
+        emit('deletedOK', {'data':'records deleted'})
+    else:
+        emit('deletedOK', {'data':'delete failed'})
 
 if __name__=="__main__":
     app.run(debug=True)

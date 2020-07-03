@@ -120,6 +120,19 @@ document.addEventListener('DOMContentLoaded', () => {
     updateRecods(data);
   })
 
+  socket.on('deletedOK', function(data) {
+    console.log(data);
+    if(data.data){
+      $("#deleteReply").html(data.data)
+      $("#deleteReply").show();
+      let showAlert = setTimeout(()=>{
+        $("#deleteReply").hide();
+        $("#deleteReply").html('')
+      },2000);
+    }
+    
+  })
+
   // listener
   showStatusBtn.addEventListener('click', ()=>{
     $(pageLive).toggleClass('view-shown');
