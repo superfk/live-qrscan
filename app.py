@@ -85,11 +85,11 @@ def show_records(data):
 
 @socketio.on('delete all records')
 def delete_all_records():
-    prog = TeamModel(name=data['group'],
+    prog = TeamModel(name='',
                     time_stamp='',
-                    gate=data['gate'],
+                    gate=1,
                     inout='') # data = {groupName:gpName, gate:'', inout:'in'};
-    ret = prog.find_records(name=data['group'], gate=data['gate'])
+    ret = prog.delete_from_db()
     if ret:
         emit('allRecords', {'data':ret})
 

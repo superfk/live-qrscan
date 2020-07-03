@@ -111,7 +111,7 @@ class TeamModel(db.Model):
             return sortIntvList
         else:
             return all_status
-
+    
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
