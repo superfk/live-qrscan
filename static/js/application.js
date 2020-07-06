@@ -70,10 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         tooltips:{
           mode: 'nearest',
-          intersect: false,
+          intersect: true,
           position: 'nearest',
           bodyFontSize: '10px',
-          yPadding: '5px'
         },
         scales:{
           xAxes: [{
