@@ -76,7 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
         tooltips:{
           mode: 'nearest',
           intersect: false,
-          position: 'nearest'
+          position: 'nearest',
+          bodyFontSize: '10px',
+          yPadding: '10px'
         },
         scales:{
           xAxes: [{
