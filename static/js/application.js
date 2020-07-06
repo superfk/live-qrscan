@@ -472,9 +472,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5：手腳印證
     // 6：燒腦B
     // 7：終局之戰
-    let gatName = gatNumber
+    let gatNumberStr = gatNumber.toString();
+    let gatName = gatNumberStr;
     
-    switch(gatNumber){
+    switch(gatNumberStr){
       case '1':
         gatName = '舞影某'
         break;
