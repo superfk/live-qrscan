@@ -60,6 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 borderWidth: 2,
             }
         },
+        layout: {
+          padding: {
+             bottom: 50  //set that fits the best
+          }
+       },
         responsive: true,
         legend: {
           display: false,
@@ -71,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tooltips:{
           mode: 'nearest',
           intersect: false,
-          position: 'average'
+          position: 'nearest'
         },
         scales:{
           xAxes: [{
