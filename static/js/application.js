@@ -61,6 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
         responsive: true,
+        maintainAspectRatio: false,
+        aspectRatio: 0.5,
         legend: {
           display: false,
         },
