@@ -70,7 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         tooltips:{
           mode: 'nearest',
-          intersect: false
+          intersect: false,
+          position: 'average'
         },
         scales:{
           xAxes: [{
