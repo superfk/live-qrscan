@@ -498,6 +498,7 @@ document.addEventListener('DOMContentLoaded', () => {
         break;
       default:
     }
+    return gatName;
 
   }
 
