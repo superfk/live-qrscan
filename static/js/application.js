@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             text: '闖關時間統計(秒)'
         },
         tooltips:{
-          mode: 'index',
+          mode: 'nearest',
           intersect: false
         },
         scales:{
