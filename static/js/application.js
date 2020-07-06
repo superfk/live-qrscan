@@ -463,6 +463,44 @@ document.addEventListener('DOMContentLoaded', () => {
     jsqrInited = true;
   }
 
+  const gateNameWrapper = (gatNumber)=> {
+
+    // 1：無影某
+    // 2：你要去傳
+    // 3：燒腦C
+    // 4：燒腦A
+    // 5：手腳印證
+    // 6：燒腦B
+    // 7：終局之戰
+    let gatName = gatNumber
+    
+    switch(gatNumber){
+      case '1':
+        gatName = '舞影某'
+        break;
+      case '2':
+        gatName = '你要去傳'
+        break;
+      case '3':
+        gatName = '燒腦C'
+        break;
+      case '4':
+        gatName = '燒腦A'
+        break;
+      case '5':
+        gatName = '手腳印證'
+        break;
+      case '6':
+        gatName = '燒腦B'
+        break;
+      case '7':
+        gatName = '終局之戰'
+        break;
+      default:
+    }
+
+  }
+
 
   // plot function
   function updateLiveStatus(chart, data) {
@@ -490,7 +528,7 @@ document.addEventListener('DOMContentLoaded', () => {
           return e.gate_status[index].intv.toFixed(2);
         })
         return {
-          label: elm.gate,
+          label: gateNameWrapper(elm.gate),
           backgroundColor: COLORS[index%COLORS.length],
           borderColor: '#2c3e50',
           data: gateTimeOfTeams
