@@ -60,11 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 borderWidth: 2,
             }
         },
-        layout: {
-          padding: {
-             bottom: 50  //set that fits the best
-          }
-       },
         responsive: true,
         legend: {
           display: false,
@@ -78,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
           intersect: false,
           position: 'nearest',
           bodyFontSize: '10px',
-          yPadding: '10px'
+          yPadding: '5px'
         },
         scales:{
           xAxes: [{
